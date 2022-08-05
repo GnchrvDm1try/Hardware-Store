@@ -1,8 +1,13 @@
+using Hardware_Store_App.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<StoreContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("defaultConnection")));
 
 var app = builder.Build();
 
