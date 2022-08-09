@@ -7,6 +7,7 @@ namespace Hardware_Store_App.Models
     {
         public Product()
         {
+            Discounts = new HashSet<Discount>();
             Orderproducts = new HashSet<Orderproduct>();
             Photos = new HashSet<Photo>();
             Reviews = new HashSet<Review>();
@@ -27,6 +28,7 @@ namespace Hardware_Store_App.Models
         public virtual Category? Category { get; set; }
         public virtual Countryproduser? Countryproducer { get; set; }
         public virtual Manufacturer? Manufacturer { get; set; }
+        public virtual ICollection<Discount> Discounts { get; set; }
         public virtual ICollection<Orderproduct> Orderproducts { get; set; }
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }

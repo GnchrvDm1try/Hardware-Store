@@ -24,6 +24,7 @@ namespace Hardware_Store_App.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<Discount> Discounts { get; set; } = null!;
         public virtual DbSet<Countryproduser> Countryprodusers { get; set; } = null!;
         public virtual DbSet<Manufacturer> Manufacturers { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
@@ -46,6 +47,32 @@ namespace Hardware_Store_App.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Discount>(entity =>
+            {
+                entity.ToTable("discounts");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Begindate)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("begindate");
+
+                entity.Property(e => e.Enddate)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("enddate");
+
+                entity.Property(e => e.Percentage)
+                    .HasPrecision(5, 2)
+                    .HasColumnName("percentage");
+
+                entity.Property(e => e.Productid).HasColumnName("productid");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Discounts)
+                    .HasForeignKey(d => d.Productid)
+                    .HasConstraintName("discounts_productid_fkey");
+            });
+
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("categories");
