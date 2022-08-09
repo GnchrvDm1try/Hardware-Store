@@ -1,0 +1,5 @@
+nav * a,
+nav * li,
+nav * button {
+  @apply text-current hover:text-current hover:scale-[1.05] hover:duration-[200ms];
+}
