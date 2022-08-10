@@ -1,0 +1,14 @@
+div {
+  position: sticky;
+  top: 100%;
+}
+
+li {
+    width: 32.5px;
+    height: 32.5px;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
