@@ -1,7 +1,5 @@
-<div class="my-4 grid grid-cols-4 grid-rows-3 gap-3">
-  <product></product>
-  <product></product>
-  <product></product>
-  <product></product>
-  <product></product>
+<div class="my-4 grid grid-cols-4 gap-3">
+  <div *ngFor="let product of products">
+    <product [name]="product.name" [price]="product.price" [rating]="product.rating"></product>
+  </div>
 </div>
