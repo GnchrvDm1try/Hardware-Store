@@ -7,7 +7,7 @@
     <h3>{{ name }}</h3>
     <p>{{ price | currency }}</p>
     <div class="flex justify-center">
-      <img class="mx-1" src="assets/icons/star_icon.svg" *ngFor="let item of [].constructor(roundedRating)">
+      <img class="mx-1" src="assets/icons/star_icon.svg" *ngFor="let item of [].constructor(+rating.toFixed())">
     </div>
   </a>
 </div>

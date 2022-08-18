@@ -20,13 +20,10 @@ export class ProductComponent implements OnInit, Product {
   @Input() manufacturerId: number = 0;
   @Input() countryProducerId: number = 0;
 
-  roundedRating: number = 0;
-
   constructor(service: ProductService) {
     this.service = service;
   }
   
   ngOnInit(): void {
-    this.roundedRating = Math.round(this.rating);
   }
 }
