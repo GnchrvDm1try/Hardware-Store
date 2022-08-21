@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Hardware_Store_App.Models
 {
-    public partial class Countryproduser
+    public partial class Countryproducer
     {
-        public Countryproduser()
+        public Countryproducer()
         {
             Products = new HashSet<Product>();
         }

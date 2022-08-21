@@ -24,8 +24,8 @@ namespace Hardware_Store_App.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
+        public virtual DbSet<Countryproducer> Countryproducers { get; set; } = null!;
         public virtual DbSet<Discount> Discounts { get; set; } = null!;
-        public virtual DbSet<Countryproduser> Countryprodusers { get; set; } = null!;
         public virtual DbSet<Manufacturer> Manufacturers { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<Orderproduct> Orderproducts { get; set; } = null!;
@@ -34,7 +34,6 @@ namespace Hardware_Store_App.Models
         public virtual DbSet<Review> Reviews { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Specification> Specifications { get; set; } = null!;
-        public virtual DbSet<Storage> Storages { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -47,6 +46,34 @@ namespace Hardware_Store_App.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.ToTable("categories");
+
+                entity.HasIndex(e => e.Name, "categories_name_key")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+            });
+
+            modelBuilder.Entity<Countryproducer>(entity =>
+            {
+                entity.ToTable("countryproducers");
+
+                entity.HasIndex(e => e.Name, "countryprodusers_name_key")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(50)
+                    .HasColumnName("name");
+            });
+
             modelBuilder.Entity<Discount>(entity =>
             {
                 entity.ToTable("discounts");
@@ -71,34 +98,6 @@ namespace Hardware_Store_App.Models
                     .WithMany(p => p.Discounts)
                     .HasForeignKey(d => d.Productid)
                     .HasConstraintName("discounts_productid_fkey");
-            });
-
-            modelBuilder.Entity<Category>(entity =>
-            {
-                entity.ToTable("categories");
-
-                entity.HasIndex(e => e.Name, "categories_name_key")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .HasColumnName("name");
-            });
-
-            modelBuilder.Entity<Countryproduser>(entity =>
-            {
-                entity.ToTable("countryprodusers");
-
-                entity.HasIndex(e => e.Name, "countryprodusers_name_key")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .HasColumnName("name");
             });
 
             modelBuilder.Entity<Manufacturer>(entity =>
@@ -185,6 +184,8 @@ namespace Hardware_Store_App.Models
                 entity.ToTable("products");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Amount).HasColumnName("amount");
 
                 entity.Property(e => e.Categoryid).HasColumnName("categoryid");
 
@@ -290,22 +291,6 @@ namespace Hardware_Store_App.Models
                     .HasConstraintName("specifications_productid_fkey");
             });
 
-            modelBuilder.Entity<Storage>(entity =>
-            {
-                entity.ToTable("storages");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Amount).HasColumnName("amount");
-
-                entity.Property(e => e.Productid).HasColumnName("productid");
-
-                entity.HasOne(d => d.Product)
-                    .WithMany(p => p.Storages)
-                    .HasForeignKey(d => d.Productid)
-                    .HasConstraintName("storages_productid_fkey");
-            });
-
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("users");
@@ -380,6 +365,8 @@ namespace Hardware_Store_App.Models
                             j.IndexerProperty<int>("Productid").HasColumnName("productid");
                         });
             });
+
+            modelBuilder.HasSequence<int>("countryproducers_id_seq");
 
             OnModelCreatingPartial(modelBuilder);
         }
