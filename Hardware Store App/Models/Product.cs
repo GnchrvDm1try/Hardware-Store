@@ -33,7 +33,6 @@ namespace Hardware_Store_App.Models
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<Specification> Specifications { get; set; }
-
         public virtual ICollection<User> Users { get; set; }
     }
 }
