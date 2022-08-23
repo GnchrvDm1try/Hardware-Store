@@ -19,4 +19,8 @@ export class ProductService {
   getProduct(id: number) {
     return this.http.get<Product[]>(this.APIUrl + `/${id}`);
   }
+
+  getReviews(productId: number) {
+    return this.http.get(this.APIUrl + `/reviews/${productId}`);
+  }
 }

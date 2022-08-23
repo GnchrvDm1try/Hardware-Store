@@ -26,7 +26,8 @@ namespace Hardware_Store_App.Controllers
         }
 
         [HttpGet("{id:}")]
-        public async Task<IActionResult> GetProduct(int id) {
+        public async Task<IActionResult> GetProduct(int id)
+        {
             return Ok(await context.Products
                 .Include(p => p.Photos)
                 .Include(p => p.Users)
@@ -36,6 +37,15 @@ namespace Hardware_Store_App.Controllers
                 .Include(p => p.Discounts)
                 .Include(p => p.Countryproducer)
                 .FirstOrDefaultAsync(p => p.Id == id));
+        }
+
+        [HttpGet("reviews/{productid:}")]
+        public async Task<IActionResult> GetReviews(int productId)
+        {
+            return Ok(await context.Reviews
+                .Where(r => r.Productid == productId)
+                .Include(r => r.User)
+                .ToListAsync());
         }
     }
 }
