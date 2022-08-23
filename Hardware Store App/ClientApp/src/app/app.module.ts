@@ -20,6 +20,7 @@ import { FooterBarComponent } from './components/footer-bar/footer-bar.component
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
+      { path: '', redirectTo: 'Products', pathMatch: 'full' }
     ]),
     ProductBaseModule
   ],
