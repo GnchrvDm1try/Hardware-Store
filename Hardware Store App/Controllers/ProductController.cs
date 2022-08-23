@@ -27,7 +27,15 @@ namespace Hardware_Store_App.Controllers
 
         [HttpGet("{id:}")]
         public async Task<IActionResult> GetProduct(int id) {
-            return Ok(await context.Products.FirstOrDefaultAsync(p => p.Id == id));
+            return Ok(await context.Products
+                .Include(p => p.Photos)
+                .Include(p => p.Users)
+                .Include(p => p.Category)
+                .Include(p => p.Manufacturer)
+                .Include(p => p.Specifications)
+                .Include(p => p.Discounts)
+                .Include(p => p.Countryproducer)
+                .FirstOrDefaultAsync(p => p.Id == id));
         }
     }
 }
