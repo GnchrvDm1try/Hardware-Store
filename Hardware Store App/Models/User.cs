@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Hardware_Store_App.Services;
 
 namespace Hardware_Store_App.Models
 {
@@ -10,6 +11,19 @@ namespace Hardware_Store_App.Models
             Orders = new HashSet<Order>();
             Reviews = new HashSet<Review>();
             Products = new HashSet<Product>();
+        }
+
+        public User(RegisterModel model)
+        {
+            this.Firstname = model.Firstname;
+            this.Lastname = model.Lastname;
+            this.Email = model.Email;
+            this.Phonenumber = model.PhoneNumber;
+            this.Sex = model.Sex;
+            this.Birthdate = DateOnly.FromDateTime(model.Birthdate);
+            this.Hashedpassword = PasswordHasher.HashPassword(model.Password);
+            this.Address = model.Address;
+            this.Roleid = 2;
         }
 
         public int Id { get; set; }
