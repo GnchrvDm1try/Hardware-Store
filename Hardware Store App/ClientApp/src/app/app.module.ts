@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
@@ -8,19 +8,23 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProductBaseModule } from './components/product-base/product-base.module';
 import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    FooterBarComponent
+    FooterBarComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'Products', pathMatch: 'full' }
+      { path: '', redirectTo: 'Products', pathMatch: 'full' },
+      { path: 'Registration', component: RegisterComponent }
     ]),
     ProductBaseModule
   ],
