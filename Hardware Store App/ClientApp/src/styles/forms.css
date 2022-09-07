@@ -1,0 +1,53 @@
+form {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0;
+}
+
+form > * + * {
+  margin-top: 1rem;
+}
+
+form * {
+  border-color: var(--main-red);
+}
+
+form input,
+form button {
+  border-width: 2px;
+  border-radius: 0.25rem;
+}
+
+form label,
+form button {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+
+form button {
+  padding: 0.25rem;
+}
+
+form button:hover,
+form button:focus {
+  background-color: var(--main-red);
+  transition: .3s;
+  outline: none;
+}
+
+form span {
+  color: red;
+}
+
+form div > span {
+    display: block;
+}
+
+form button[disabled] {
+  opacity: 0.4;
+  cursor: no-drop;
+  outline: none;
+}
