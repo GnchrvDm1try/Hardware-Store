@@ -1,7 +1,7 @@
 <div *ngIf="product !== undefined; else undef">
   <div class="flex mt-2 justify-between items-center">
-    <h2 class="h2 m-0 break-words max-w-[70%]">{{product.name}}</h2>
-    <h3 class="h5 m-0 break-words max-w-[30%] text-gray-400">{{product.category.name}}</h3>
+    <h2 class="font-semibold text-3xl m-0 break-words max-w-[70%]">{{product.name}}</h2>
+    <h3 class="font-semibold text-xl m-0 break-words max-w-[30%] text-gray-400">{{product.category.name}}</h3>
   </div>
 
   <hr />
@@ -46,10 +46,10 @@
   <div class="space-y-2">
     <div *ngFor="let review of reviews" class="border rounded p-2">
       <div class="flex justify-between">
-        <p>{{review.user.firstname}} {{review.user.lastname}}</p>
+        <p class="font-medium">{{review.user.firstname}} {{review.user.lastname}}</p>
         <p>{{review.reviewdate}}</p>
       </div>
-      <div class="text-center">
+      <div class="text-justify break-words mx-auto max-w-[95%]">
         <p>{{review.comment}}</p>
       </div>
       <p class="font-semibold">{{review.estimation}}</p>
