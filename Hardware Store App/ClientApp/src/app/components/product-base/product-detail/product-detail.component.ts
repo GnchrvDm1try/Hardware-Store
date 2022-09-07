@@ -36,6 +36,6 @@ export class ProductDetailComponent implements OnInit {
     const productId = +this.route.snapshot.paramMap.get('id')!;
     this.service.getReviews(productId).subscribe(
       data => this.reviews = data
-    )
+    );
   }
 }

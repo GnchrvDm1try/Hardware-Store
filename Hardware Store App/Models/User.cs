@@ -15,8 +15,8 @@ namespace Hardware_Store_App.Models
 
         public User(RegisterModel model)
         {
-            this.Firstname = model.Firstname;
-            this.Lastname = model.Lastname;
+            this.Firstname = model.FirstName;
+            this.Lastname = model.LastName;
             this.Email = model.Email;
             this.Phonenumber = model.PhoneNumber;
             this.Sex = model.Sex;
@@ -40,9 +40,9 @@ namespace Hardware_Store_App.Models
         public int? Roleid { get; set; }
 
         public virtual Role? Role { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Order>? Orders { get; set; }
+        public virtual ICollection<Review>? Reviews { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Product>? Products { get; set; }
     }
 }

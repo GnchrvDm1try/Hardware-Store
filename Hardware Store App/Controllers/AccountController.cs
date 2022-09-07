@@ -57,8 +57,8 @@ namespace Hardware_Store_App.Controllers
             return Ok(tokenString);
         }
 
-        [HttpPost("registration")]
-        public async Task<IActionResult> registration([FromBody] RegisterModel model)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 

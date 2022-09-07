@@ -16,9 +16,9 @@ namespace Hardware_Store_App.Models
     public class RegisterModel
     {
         [Required]
-        public string Firstname { get; set; } = String.Empty;
+        public string FirstName { get; set; } = String.Empty;
         [Required]
-        public string Lastname { get; set; } = String.Empty;
+        public string LastName { get; set; } = String.Empty;
         [Required]
         [MinLength(8)]
         [MaxLength(200)]
@@ -36,7 +36,7 @@ namespace Hardware_Store_App.Models
         [Required]
         public string Sex { get; set; } = String.Empty;
         [Required]
-        public DateOnly Birthdate { get; set; }
+        public DateTime Birthdate { get; set; }
         public string Address { get; set; } = String.Empty;
         public int Roleid { get; set; } = 2;
     }

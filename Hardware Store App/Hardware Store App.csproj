@@ -31,10 +31,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\models\auth.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="ClientApp\src\assets\icons\facebook_icon.svg" />
     <Content Include="ClientApp\src\assets\icons\twitter_icon.svg" />
     <Content Include="ClientApp\src\assets\icons\github_icon.svg" />
     <Content Include="ClientApp\src\assets\icons\youtube_icon.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\models\auth.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
