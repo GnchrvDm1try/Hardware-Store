@@ -20,11 +20,15 @@ namespace Hardware_Store_App.Models
         [Required]
         public string Lastname { get; set; } = String.Empty;
         [Required]
+        [MinLength(8)]
+        [MaxLength(200)]
         public string Password { get; set; } = String.Empty;
         [Required]
         [Compare("Password")]
         public string PasswordConfirm { get; set; } = String.Empty;
         [Required]
+        [MinLength(3)]
+        [MaxLength(320)]
         public string Email { get; set; } = String.Empty;
         [MinLength(7)]
         [MaxLength(16)]
