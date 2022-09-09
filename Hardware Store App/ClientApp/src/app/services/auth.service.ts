@@ -21,4 +21,8 @@ export class AuthService {
       error => console.error(error)
     );
   }
+  
+  login(form: FormGroup) {
+    return this.http.post(this.APIUrl + "/login", form.getRawValue());
+  }
 }
