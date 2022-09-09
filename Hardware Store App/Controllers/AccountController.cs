@@ -64,7 +64,7 @@ namespace Hardware_Store_App.Controllers
 
             var user = await context.Users.Where(u => u.Email == model.Email || u.Phonenumber == model.PhoneNumber).FirstOrDefaultAsync();
 
-            if (user is not null) return BadRequest("Email or phone number is already exist");
+            if (user is not null && user.Phonenumber is not null) return BadRequest("User with such email or phone is already exists");
 
             await context.Users.AddAsync(new User(model));
             await context.SaveChangesAsync();
