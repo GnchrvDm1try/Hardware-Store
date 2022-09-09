@@ -1,8 +1,7 @@
 <div *ngIf="product !== undefined" class="border rounded-xl p-1">
   <a [routerLink]="['Details', product.id]" class="text-center">
-    <div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMQX3FKpxqCWFR6lqp2uXTE-khmlXtz6Xxvw&usqp=CAU"
-        alt="Failed to load image." class="w-full h-full rounded-t-lg">
+    <div class="rounded-t-lg overflow-hidden">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMQX3FKpxqCWFR6lqp2uXTE-khmlXtz6Xxvw&usqp=CAU" alt="Failed to load image." class="w-full h-full hover:opacity-80 hover:scale-105 duration-100">
     </div>
     <h3>{{ product.name }}</h3>
     <p>{{ product.price | currency }}</p>
