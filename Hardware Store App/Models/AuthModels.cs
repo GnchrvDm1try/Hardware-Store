@@ -32,12 +32,13 @@ namespace Hardware_Store_App.Models
         public string Email { get; set; } = String.Empty;
         [MinLength(7)]
         [MaxLength(16)]
-        public string PhoneNumber { get; set; } = String.Empty;
+        public string? PhoneNumber { get; set; } = null;
         [Required]
         public string Sex { get; set; } = String.Empty;
         [Required]
         public DateTime Birthdate { get; set; }
-        public string Address { get; set; } = String.Empty;
+        [MinLength(7)]
+        public string? Address { get; set; } = null;
         public int Roleid { get; set; } = 2;
     }
 }

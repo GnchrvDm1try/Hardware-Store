@@ -1,4 +1,4 @@
-<form class="w-1/4" [formGroup]="form" method="post" (ngSubmit)="logFormControls()">
+<form class="w-1/4" [formGroup]="form" method="post" (ngSubmit)="submit()">
   <div class="flex flex-col">
     <label>First name<span>*</span></label>
     <input type="text" name="firstName" formControlName="firstName" maxlength="50" />
@@ -89,9 +89,9 @@
     <label>Confirm password<span>*</span></label>
     <input type="password" name="passwordConfirm" formControlName="passwordConfirm" required />
     <div *ngIf="form.get('passwordConfirm') as pc">
-      <div *ngIf="pc?.touched">
+      <div *ngIf="pc?.touched && (pc?.invalid || form.invalid)">
         <span *ngIf="pc.errors?.required">You have to confirm the password</span>
-        <span *ngIf="form.get('password')?.value !== pc.value">Passwords do not match</span>
+        <span *ngIf="form.hasError('mismatch')">Passwords do not match</span>
       </div>
     </div>
   </div>
