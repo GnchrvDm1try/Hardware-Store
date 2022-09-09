@@ -35,7 +35,7 @@ namespace Hardware_Store_App.Models
         public bool Isemailconfirmed { get; set; }
         public DateOnly Birthdate { get; set; }
         public DateTime Registrationdate { get; set; }
-        public string Address { get; set; } = null!;
+        public string? Address { get; set; }
         public string? Hashedpassword { get; set; }
         public int? Roleid { get; set; }
 
