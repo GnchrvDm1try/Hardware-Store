@@ -9,13 +9,15 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProductBaseModule } from './components/product-base/product-base.module';
 import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
 import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     FooterBarComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -24,7 +26,8 @@ import { RegisterComponent } from './components/register/register.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'Products', pathMatch: 'full' },
-      { path: 'Registration', component: RegisterComponent }
+      { path: 'Registration', component: RegisterComponent },
+      { path: 'Login', component: LoginComponent }
     ]),
     ProductBaseModule
   ],
