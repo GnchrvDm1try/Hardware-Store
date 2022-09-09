@@ -54,7 +54,8 @@ namespace Hardware_Store_App.Controllers
             );
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-            return Ok(tokenString);
+            var JWTToken = new { JWTToken = tokenString };
+            return Ok(JWTToken);
         }
 
         [HttpPost("register")]
