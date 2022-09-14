@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Hardware_Store_App.Models;
+using Hardware_Store_App.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Security.Cryptography;
-using Hardware_Store_App.Services;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Hardware_Store_App.Controllers
 {
@@ -33,29 +28,28 @@ namespace Hardware_Store_App.Controllers
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var userFromDb = await context.Users
-            .Where(u => u.Email == model.Email && u.Hashedpassword == PasswordHasher.HashPassword(model.Password))
-            .FirstOrDefaultAsync();
+                .Where(u => u.Email == model.Email && u.Hashedpassword == PasswordHasher.HashPassword(model.Password))
+                .FirstOrDefaultAsync();
             if (userFromDb is null) return BadRequest("Email or password is incorrect");
 
-            string role = context.Roles.Where(r => r.Id == userFromDb.Roleid).First().ToString()!;
+            string role = context.Roles.Where(r => r.Id == userFromDb.Roleid).First().Name;
 
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["SecretKey"]));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-            var tokeOptions = new JwtSecurityToken(
+            var tokenOptions = new JwtSecurityToken(
                 issuer: "https://localhost:7254",
                 audience: "https://localhost:7254",
                 claims: new List<Claim>()
                 {
-                        new Claim(ClaimTypes.Email, model.Email),
-                        new Claim(ClaimTypes.Role, role)
+                        new Claim(JwtRegisteredClaimNames.Email, model.Email),
+                        new Claim("role", role)
                 },
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddDays(7),
                 signingCredentials: signinCredentials
             );
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-            var JWTToken = new { JWTToken = tokenString };
-            return Ok(JWTToken);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            return Ok(tokenString);
         }
 
         [HttpPost("register")]
