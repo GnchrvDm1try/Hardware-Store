@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -30,10 +31,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() {
-    this.service.login(this.form).subscribe(response => {
-      this.JWTToken = response
-    });
+  async submit() {
+    await this.service.login(this.form)
+      .then(success => {
+        if (success) this.router.navigate([""]);
+        else this.errorMessage = "Unknown error occurred";
+      })
+      .catch((HTTPError: HttpErrorResponse) => this.errorMessage = HTTPError.error);
   }
 
   private getFormGroupInstance() {
