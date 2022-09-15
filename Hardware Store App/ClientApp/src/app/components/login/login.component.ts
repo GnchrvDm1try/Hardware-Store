@@ -13,17 +13,13 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   errorMessage: string | undefined;
 
-  private readonly service: AuthService;
+  private readonly authService: AuthService;
   private readonly formBuilder: FormBuilder;
   private readonly router: Router;
 
-  private JWTToken: object = {
-    "jwtToken": ""
-  };
-
-  constructor(formBuilder: FormBuilder, service: AuthService, router: Router) {
+  constructor(authService: AuthService, formBuilder: FormBuilder, router: Router) {
+    this.authService = authService;
     this.formBuilder = formBuilder;
-    this.service = service;
     this.router = router;
     this.form = this.getFormGroupInstance();
   }
@@ -32,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   async submit() {
-    await this.service.login(this.form)
+    await this.authService.login(this.form)
       .then(success => {
         if (success) this.router.navigate([""]);
         else this.errorMessage = "Unknown error occurred";

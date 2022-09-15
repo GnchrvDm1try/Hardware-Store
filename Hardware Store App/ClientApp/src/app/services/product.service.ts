@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Product } from '../models/product';
 
@@ -15,12 +16,12 @@ export class ProductService {
     this.http = http;
   }
 
-  getProducts() {
+  getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.APIUrl);
   }
 
-  getProduct(id: number) {
-    return this.http.get<Product[]>(this.APIUrl + `/${id}`);
+  getProduct(id: number): Observable<Product> {
+    return this.http.get<Product>(this.APIUrl + `/${id}`);
   }
 
   getReviews(productId: number) {

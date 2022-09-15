@@ -6,7 +6,7 @@ namespace Hardware_Store_App.Models
     {
         [Required]
         [EmailAddress]
-        [MinLength(5)]
+        [MinLength(3)]
         public string Email { get; set; } = String.Empty;
         [Required]
         [DataType(DataType.Password)]

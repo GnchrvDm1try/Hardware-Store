@@ -59,18 +59,18 @@ namespace Hardware_Store_App.Controllers
 
             var user = await context.Users.Where(u => u.Email == model.Email).FirstOrDefaultAsync();
 
-            if (user is not null) return BadRequest("User with such email is already exists");
+            if (user is not null) return BadRequest("The user with such email is already exists");
 
             if (model.PhoneNumber is not null)
             {
                 user = await context.Users.Where(u => u.Phonenumber == model.PhoneNumber).FirstOrDefaultAsync();
-                if (user is not null) return BadRequest("User with such phone number is already exists");
+                if (user is not null) return BadRequest("The user with such phone number is already exists");
             }
 
             await context.Users.AddAsync(new User(model));
             await context.SaveChangesAsync();
 
-            return Ok(model);
+            return Ok("The user has been successfully created");
         }
     }
 }
