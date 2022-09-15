@@ -1,25 +1,28 @@
 <form class="w-1/4" [formGroup]="form" method="post" (ngSubmit)="submit()">
-    <div class="flex flex-col">
-        <label>Email<span>*</span></label>
-        <input type="email" name="email" formControlName="email" maxlength="50" />
-        <div *ngIf="form.get('email') as em">
-            <div *ngIf="em?.touched && em?.invalid">
-                <span *ngIf="em.errors?.required">You have to provide your email</span>
-                <span *ngIf="em.errors?.email">Email is incorrect</span>
-            </div>
-        </div>
+  <div class="error" *ngIf="errorMessage !== undefined">
+    <span>{{errorMessage}}</span>
+  </div>
+  <div class="flex flex-col">
+    <label>Email<span>*</span></label>
+    <input type="email" name="email" formControlName="email" maxlength="50" />
+    <div *ngIf="form.get('email') as em">
+      <div *ngIf="em?.touched && em?.invalid">
+        <span *ngIf="em.errors?.required">You have to provide your email</span>
+        <span *ngIf="em.errors?.email">Email is incorrect</span>
+      </div>
     </div>
-    <div class="flex flex-col">
-        <label>Password<span>*</span></label>
-        <input type="password" name="password" formControlName="password" maxlength="50" />
-        <div *ngIf="form.get('password') as pw">
-            <div *ngIf="pw?.touched && pw?.invalid">
-                <span *ngIf="pw.errors?.required">You have to provide password</span>
-                <span *ngIf="pw.errors?.minlength">The password has to be 8 or more characters long</span>
-                <span *ngIf="pw.errors?.pattern">Password must contain at least one uppercase letter, one lowercase
-                    letter, one number and one special character</span>
-            </div>
-        </div>
+  </div>
+  <div class="flex flex-col">
+    <label>Password<span>*</span></label>
+    <input type="password" name="password" formControlName="password" maxlength="50" />
+    <div *ngIf="form.get('password') as pw">
+      <div *ngIf="pw?.touched && pw?.invalid">
+        <span *ngIf="pw.errors?.required">You have to provide password</span>
+        <span *ngIf="pw.errors?.minlength">The password has to be 8 or more characters long</span>
+        <span *ngIf="pw.errors?.pattern">Password must contain at least one uppercase letter, one lowercase
+          letter, one number and one special character</span>
+      </div>
     </div>
-    <button [disabled]="form.invalid" type="submit">Sign Up</button>
+  </div>
+  <button [disabled]="form.invalid" type="submit">Sign Up</button>
 </form>

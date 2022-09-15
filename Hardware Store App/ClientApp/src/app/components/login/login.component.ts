@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   form: FormGroup;
+  errorMessage: string | undefined;
 
   private readonly service: AuthService;
   private readonly formBuilder: FormBuilder;
