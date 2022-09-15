@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export const ACCESS_TOKEN_KEY = "ACCESS_TOKEN_KEY";
@@ -35,12 +35,13 @@ export class AuthService {
     return this.http.post(this.APIUrl + "/register", form.getRawValue());
   }
 
-  login(form: FormGroup) {
-    return this.http.post(this.APIUrl + "/login", form.getRawValue());
+  async login(form: FormGroup): Promise<boolean> {
+    await this.http.post<string>(this.APIUrl + "/login", form.getRawValue(), { responseType: "text" as "json" }).pipe(tap(token => this.userToken = token)).toPromise();
+    return !!this.userToken
   }
 
   isUserAuthenticated(): boolean {
-    let token: string | null = localStorage.getItem(ACCESS_TOKEN_KEY);
+    let token: string | null = this.userToken;
     return (!!token && !this.jwtHelper.isTokenExpired(token)) as boolean;
   }
 
