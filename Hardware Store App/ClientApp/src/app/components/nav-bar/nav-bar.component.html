@@ -11,10 +11,13 @@
         </li>
       </ul>
       <ul class="flex font-medium text-lg space-x-[20px]">
-        <li>
+        <li *ngIf="isLoggedIn">
+          <button (click)="logout()">Logout</button>
+        </li>
+        <li *ngIf="!isLoggedIn">
           <a [routerLink]="['Login']">Login</a>
         </li>
-        <li>
+        <li *ngIf="!isLoggedIn">
           <a [routerLink]="['Registration']">Register</a>
         </li>
       </ul>

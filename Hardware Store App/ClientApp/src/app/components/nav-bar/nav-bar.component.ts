@@ -12,6 +12,10 @@ export class NavBarComponent implements OnInit {
   private readonly authService: AuthService;
   private readonly router: Router;
 
+  public get isLoggedIn(): boolean {
+    return this.authService.isUserAuthenticated();
+  }
+
   constructor(authService: AuthService, router: Router) {
     this.authService = authService;
     this.router = router;
