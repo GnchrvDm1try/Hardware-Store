@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   form: FormGroup;
+  errorMessage: string | undefined;
 
   private readonly service: AuthService;
   private readonly formBuilder: FormBuilder;
@@ -39,6 +40,7 @@ export class RegisterComponent implements OnInit {
       })
       .catch((HTTPError: HttpErrorResponse) => this.errorMessage = HTTPError.error);
   }
+
   private getFormGroupInstance() {
     let registrationForm: FormGroup;
     registrationForm = this.formBuilder.group({

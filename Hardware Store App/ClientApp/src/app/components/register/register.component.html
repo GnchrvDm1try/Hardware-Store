@@ -1,4 +1,7 @@
 <form class="w-1/4" [formGroup]="form" method="post" (ngSubmit)="submit()">
+  <div class="error" *ngIf="errorMessage !== undefined">
+    <span>{{errorMessage}}</span>
+  </div>
   <div class="flex flex-col">
     <label>First name<span>*</span></label>
     <input type="text" name="firstName" formControlName="firstName" maxlength="50" />
