@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async submit() {
-    await this.authService.login(this.form)
+  submit() {
+    this.authService.login(this.form)
       .then(success => {
         if (success) this.router.navigate([""]);
         else this.errorMessage = "Unknown error occurred";

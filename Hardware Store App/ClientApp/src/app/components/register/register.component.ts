@@ -1,7 +1,7 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
   errorMessage: string | undefined;
 
-  private readonly service: AuthService;
+  private readonly authService: AuthService;
   private readonly formBuilder: FormBuilder;
   private readonly router: Router;
 
@@ -22,9 +22,9 @@ export class RegisterComponent implements OnInit {
   minAllowedBirthDate: string = this.currentDateTime.getFullYear() - 100 + "-01" + "-01";
 
 
-  constructor(formBuilder: FormBuilder, service: AuthService, router: Router) {
+  constructor(formBuilder: FormBuilder, authService: AuthService, router: Router) {
     this.formBuilder = formBuilder;
-    this.service = service;
+    this.authService = authService;
     this.router = router;
     this.form = this.getFormGroupInstance();
   }
@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    this.service.register(this.form)
+    this.authService.register(this.form)
       .then(success => {
         if (success) this.router.navigate(["Login"]);
         else this.errorMessage = "Unknown error occurred";
