@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
@@ -32,12 +32,13 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    this.service.register(this.form).subscribe(response => {
-      console.log(response);
-    });
-    this.router.navigateByUrl("/");
+    this.service.register(this.form)
+      .then(success => {
+        if (success) this.router.navigate(["Login"]);
+        else this.errorMessage = "Unknown error occurred";
+      })
+      .catch((HTTPError: HttpErrorResponse) => this.errorMessage = HTTPError.error);
   }
-
   private getFormGroupInstance() {
     let registrationForm: FormGroup;
     registrationForm = this.formBuilder.group({
