@@ -31,8 +31,9 @@ export class AuthService {
     this.jwtHelper = jwtHelper;
   }
 
-  register(form: FormGroup) {
-    return this.http.post(this.APIUrl + "/register", form.getRawValue());
+  async register(form: FormGroup): Promise<boolean> {
+    return await this.http.post(this.APIUrl + "/register", form.getRawValue(), { observe: "response", responseType: "text" as "json" }).toPromise()
+    .then(() => true);
   }
 
   async login(form: FormGroup): Promise<boolean> {
