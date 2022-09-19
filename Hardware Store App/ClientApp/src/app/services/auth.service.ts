@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { tap } from 'rxjs';
 import { environment } from '../../environments/environment';
@@ -14,6 +15,7 @@ export class AuthService {
 
   private readonly http: HttpClient;
   private readonly jwtHelper: JwtHelperService;
+  private readonly router: Router;
   private readonly APIUrl: string = environment.baseAPIUrl + "/api/account";
 
   get userToken(): string | null {
@@ -26,9 +28,10 @@ export class AuthService {
     localStorage.setItem(ACCESS_TOKEN_KEY, newToken);
   }
 
-  constructor(http: HttpClient, jwtHelper: JwtHelperService) {
+  constructor(http: HttpClient, jwtHelper: JwtHelperService, router: Router) {
     this.http = http;
     this.jwtHelper = jwtHelper;
+    this.router = router;
   }
 
   async register(form: FormGroup): Promise<boolean> {
@@ -47,6 +50,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.clear();
+    this.router.navigate([""]);
   }
 }
