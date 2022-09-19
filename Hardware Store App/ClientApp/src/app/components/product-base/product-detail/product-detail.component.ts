@@ -27,15 +27,15 @@ export class ProductDetailComponent implements OnInit {
 
   getProduct() {
     const productId = +this.route.snapshot.paramMap.get('id')!;
-    this.service.getProduct(productId).subscribe(
-      data => this.product = data
+    this.service.getProduct(productId).subscribe(data =>
+      this.product = data
     );
   }
 
   getReviews() {
     const productId = +this.route.snapshot.paramMap.get('id')!;
-    this.service.getReviews(productId).subscribe(
-      data => this.reviews = data
-    )
+    this.service.getReviews(productId).subscribe(data =>
+      this.reviews = data
+    );
   }
 }
