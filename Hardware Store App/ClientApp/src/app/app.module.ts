@@ -14,6 +14,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
 import { JwtExpirationInterceptor } from './interceptors/jwt-expiration.interceptor';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -25,7 +27,8 @@ export function tokenGetter() {
     NavBarComponent,
     FooterBarComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -35,7 +38,8 @@ export function tokenGetter() {
     RouterModule.forRoot([
       { path: '', redirectTo: 'Products', pathMatch: 'full' },
       { path: 'Registration', component: RegisterComponent },
-      { path: 'Login', component: LoginComponent }
+      { path: 'Login', component: LoginComponent },
+      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
     ]),
     ProductBaseModule,
     JwtModule.forRoot({
