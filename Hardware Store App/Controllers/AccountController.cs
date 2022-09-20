@@ -41,8 +41,8 @@ namespace Hardware_Store_App.Controllers
                 audience: "https://localhost:7254",
                 claims: new List<Claim>()
                 {
-                        new Claim(JwtRegisteredClaimNames.Email, model.Email),
-                        new Claim("role", role)
+                        new Claim("id", userFromDb.Id.ToString()),
+                        new Claim("role", role),
                 },
                 expires: DateTime.Now.AddDays(7),
                 signingCredentials: signinCredentials
