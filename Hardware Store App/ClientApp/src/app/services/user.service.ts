@@ -7,9 +7,13 @@ import { environment } from 'src/environments/environment';
 })
 export class UserService {
   private readonly http: HttpClient;
-  private readonly apiURL: string = environment.baseAPIUrl + "api/user";
+  private readonly apiURL: string = environment.baseAPIUrl + "/api/user";
 
   constructor(http: HttpClient) {
     this.http = http;
+  }
+
+  getCurrentUser() {
+    return this.http.get(this.apiURL + "/currentUser");
   }
 }
