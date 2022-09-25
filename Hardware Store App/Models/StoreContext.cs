@@ -34,6 +34,7 @@ namespace Hardware_Store_App.Models
         public virtual DbSet<Review> Reviews { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Specification> Specifications { get; set; } = null!;
+        public virtual DbSet<Status> Statuses { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -125,7 +126,15 @@ namespace Hardware_Store_App.Models
                     .HasColumnName("orderdate")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+                entity.Property(e => e.Statusid).HasColumnName("statusid");
+
                 entity.Property(e => e.Userid).HasColumnName("userid");
+
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.Statusid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("orders_statusid_fkey");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
@@ -291,6 +300,20 @@ namespace Hardware_Store_App.Models
                     .HasConstraintName("specifications_productid_fkey");
             });
 
+            modelBuilder.Entity<Status>(entity =>
+            {
+                entity.ToTable("statuses");
+
+                entity.HasIndex(e => e.Title, "statuses_title_key")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Title)
+                    .HasMaxLength(50)
+                    .HasColumnName("title");
+            });
+
             modelBuilder.Entity<User>(entity =>
             {
                 entity.ToTable("users");
@@ -367,6 +390,8 @@ namespace Hardware_Store_App.Models
             });
 
             modelBuilder.HasSequence<int>("countryproducers_id_seq");
+
+            modelBuilder.HasSequence<int>("users_id_seq");
 
             OnModelCreatingPartial(modelBuilder);
         }
