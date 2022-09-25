@@ -12,6 +12,9 @@
       </ul>
       <ul class="flex font-medium text-lg space-x-[20px]">
         <li *ngIf="isLoggedIn">
+          <button [routerLink]="['Profile']">Profile</button>
+        </li>
+        <li *ngIf="isLoggedIn">
           <button (click)="logout()">Logout</button>
         </li>
         <li *ngIf="!isLoggedIn">
