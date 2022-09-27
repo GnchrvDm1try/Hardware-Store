@@ -10,6 +10,10 @@ export class ProfileComponent implements OnInit {
   private readonly userService: UserService;
   user: any;
 
+  get registrationDate(): string {
+    return this.user['registrationdate'].split('T')[0].split('-');
+  }
+
   constructor(userService: UserService) {
     this.userService = userService;
   }
