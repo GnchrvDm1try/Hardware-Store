@@ -6,9 +6,11 @@ namespace Hardware_Store_App.Models
     {
         [Required]
         [EmailAddress]
-        [MinLength(3)]
         public string Email { get; set; } = String.Empty;
         [Required]
+        [MinLength(8)]
+        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&_])[A-Za-z\\d@$!%*#?&_]{8,}$",
+            ErrorMessage = "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character")]
         [DataType(DataType.Password)]
         public string Password { get; set; } = String.Empty;
     }
