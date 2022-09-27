@@ -1,0 +1,33 @@
+ul li {
+    display: flex;
+    align-items: center;
+}
+
+ul li img {
+    height: 1.75rem;
+    width: 1.75rem;
+    margin-right: 0.5rem;
+}
+
+ul li h3 {
+    font-weight: normal;
+    color: rgb(156 163 175);
+}
+
+ul li div {
+    width: calc(100% - 36px);
+}
+
+.set {
+    overflow-wrap: break-word;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+}
+
+.not-set {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-style: italic;
+    font-weight: 400
+}
