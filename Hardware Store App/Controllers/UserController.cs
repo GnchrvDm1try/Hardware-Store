@@ -25,10 +25,16 @@ namespace Hardware_Store_App.Controllers
         public async Task<IActionResult> GetCurrentUser()
         {
             int id = Convert.ToInt32(HttpContext.User.FindFirst("id")!.Value);
-            User? user = await this.context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            User? user = await this.context.Users
+                .Include(u => u.Orders)!
+                .ThenInclude(o => o.Status)
+                .Include(u => u.Orders)!
+                .ThenInclude(o => o.Orderproducts)
+                .ThenInclude(p => p.Product)
+                .FirstOrDefaultAsync(u => u.Id == id);
             if (user is null) return BadRequest("Couldn't find the user");
             return Ok(user);
         }
-
+        
     }
 }
