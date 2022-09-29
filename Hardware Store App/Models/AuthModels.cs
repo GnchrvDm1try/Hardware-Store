@@ -38,7 +38,7 @@ namespace Hardware_Store_App.Models
         [Required]
         public string Sex { get; set; } = String.Empty;
         [Required]
-        public DateTime Birthdate { get; set; }
+        public DateTime? Birthdate { get; set; } = null;
         [MinLength(7)]
         public string? Address { get; set; } = null;
         public int Roleid { get; set; } = 2;
