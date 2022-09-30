@@ -12,7 +12,7 @@ namespace Hardware_Store_App.Models
             Photos = new HashSet<Photo>();
             Reviews = new HashSet<Review>();
             Specifications = new HashSet<Specification>();
-            Users = new HashSet<User>();
+            Wishlists = new HashSet<Wishlist>();
         }
 
         public int Id { get; set; }
@@ -33,6 +33,6 @@ namespace Hardware_Store_App.Models
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ICollection<Review> Reviews { get; set; }
         public virtual ICollection<Specification> Specifications { get; set; }
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<Wishlist> Wishlists { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Hardware_Store_App.Models
         {
             Orders = new HashSet<Order>();
             Reviews = new HashSet<Review>();
-            Products = new HashSet<Product>();
+            Wishlists = new HashSet<Wishlist>();
         }
 
         public User(RegisterModel model)
@@ -43,7 +43,6 @@ namespace Hardware_Store_App.Models
         public virtual Role? Role { get; set; }
         public virtual ICollection<Order>? Orders { get; set; }
         public virtual ICollection<Review>? Reviews { get; set; }
-
-        public virtual ICollection<Product>? Products { get; set; }
+        public virtual ICollection<Wishlist>? Wishlists { get; set; }
     }
 }
