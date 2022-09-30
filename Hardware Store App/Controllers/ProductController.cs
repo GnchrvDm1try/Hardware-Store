@@ -30,7 +30,6 @@ namespace Hardware_Store_App.Controllers
         {
             return Ok(await context.Products
                 .Include(p => p.Photos)
-                .Include(p => p.Users)
                 .Include(p => p.Category)
                 .Include(p => p.Manufacturer)
                 .Include(p => p.Specifications)
