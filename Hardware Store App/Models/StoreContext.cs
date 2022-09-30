@@ -7,7 +7,7 @@ namespace Hardware_Store_App.Models
 {
     public partial class StoreContext : DbContext
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration? configuration;
 
         public StoreContext(IConfiguration configuration)
         {
@@ -36,6 +36,7 @@ namespace Hardware_Store_App.Models
         public virtual DbSet<Specification> Specifications { get; set; } = null!;
         public virtual DbSet<Status> Statuses { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Wishlist> Wishlists { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -370,26 +371,39 @@ namespace Hardware_Store_App.Models
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.Roleid)
                     .HasConstraintName("fk_role");
+            });
 
-                entity.HasMany(d => d.Products)
-                    .WithMany(p => p.Users)
-                    .UsingEntity<Dictionary<string, object>>(
-                        "Wishlistproduct",
-                        l => l.HasOne<Product>().WithMany().HasForeignKey("Productid").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("wishlistproducts_productid_fkey"),
-                        r => r.HasOne<User>().WithMany().HasForeignKey("Userid").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("wishlistproducts_userid_fkey"),
-                        j =>
-                        {
-                            j.HasKey("Userid", "Productid").HasName("wishlistproducts_pkey");
+            modelBuilder.Entity<Wishlist>(entity =>
+            {
+                entity.HasKey(e => new { e.Userid, e.Productid })
+                    .HasName("wishlistproducts_pkey");
 
-                            j.ToTable("wishlistproducts");
+                entity.ToTable("wishlists");
 
-                            j.IndexerProperty<int>("Userid").HasColumnName("userid");
+                entity.Property(e => e.Userid).HasColumnName("userid");
 
-                            j.IndexerProperty<int>("Productid").HasColumnName("productid");
-                        });
+                entity.Property(e => e.Productid).HasColumnName("productid");
+
+                entity.Property(e => e.Additiondate)
+                    .HasColumnName("additiondate")
+                    .HasDefaultValueSql("CURRENT_DATE");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Wishlists)
+                    .HasForeignKey(d => d.Productid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("wishlistproducts_productid_fkey");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Wishlists)
+                    .HasForeignKey(d => d.Userid)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("wishlistproducts_userid_fkey");
             });
 
             modelBuilder.HasSequence<int>("countryproducers_id_seq");
+
+            modelBuilder.HasSequence<int>("statuses_id_seq");
 
             modelBuilder.HasSequence<int>("users_id_seq");
 
