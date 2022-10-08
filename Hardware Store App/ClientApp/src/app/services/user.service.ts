@@ -20,7 +20,7 @@ export class UserService {
     this.user = this.getCurrentUser();
   }
 
-  getCurrentUser() {
+  private getCurrentUser() {
     return this.http.get(this.apiURL + "/currentUser");
   }
 }
