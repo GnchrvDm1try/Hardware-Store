@@ -14,9 +14,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
 import { JwtExpirationInterceptor } from './interceptors/jwt-expiration.interceptor';
-import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { CredentialsComponent } from './components/profile-base/credentials/credentials.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -29,7 +29,7 @@ export function tokenGetter() {
     FooterBarComponent,
     RegisterComponent,
     LoginComponent,
-    ProfileComponent
+    CredentialsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,7 +40,7 @@ export function tokenGetter() {
       { path: '', redirectTo: 'Products', pathMatch: 'full' },
       { path: 'Registration', component: RegisterComponent },
       { path: 'Login', component: LoginComponent },
-      { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
+      { path: 'Profile', component: CredentialsComponent, canActivate: [AuthGuard] }
     ]),
     ProductBaseModule,
     JwtModule.forRoot({
