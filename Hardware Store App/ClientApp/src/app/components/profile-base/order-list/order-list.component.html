@@ -1,0 +1,17 @@
+<ng-container *ngIf="!!orders && orders.length !== 0; else empty">
+  <div class="border-[1px] border-slate-400 rounded m-2 p-2 flex justify-between" *ngFor="let order of orders">
+    <ng-container *ngIf="orderDate(order) as date">
+      <div class="flex justify-between w-[93%]">
+        <p>{{date[2]}}.{{date[1]}}.{{date[0]}}</p>
+        <p>{{order.status.title}}</p>
+        <p>{{orderTotalPrice(order) | currency}}</p>
+      </div>
+      <img class="w-[3%] rotate-[270deg] hover:cursor-pointer" src="assets/icons/dropdown_icon.svg" alt="See more/less" />
+    </ng-container>
+  </div>
+</ng-container>
+<ng-template #empty>
+  <div class="h-full flex items-center justify-center">
+    <p class="text-xl font-medium">The list of orders is empty</p>
+  </div>
+</ng-template>
