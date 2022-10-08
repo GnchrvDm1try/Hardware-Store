@@ -11,6 +11,10 @@ export class UserService {
   private readonly apiURL: string = environment.baseAPIUrl + "/api/user";
   private user: Observable<any>;
 
+  get currentUser() {
+    return this.user;
+  }
+
   constructor(http: HttpClient) {
     this.http = http;
     this.user = this.getCurrentUser();
