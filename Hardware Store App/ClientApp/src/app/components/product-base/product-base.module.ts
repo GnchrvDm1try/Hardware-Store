@@ -5,7 +5,6 @@ import { ProductComponent } from './product/product.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { RouterModule } from '@angular/router';
 
-
 @NgModule({
   declarations: [
     ProductComponent,
