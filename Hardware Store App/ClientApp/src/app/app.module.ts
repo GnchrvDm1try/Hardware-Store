@@ -17,6 +17,7 @@ import { JwtExpirationInterceptor } from './interceptors/jwt-expiration.intercep
 import { AuthGuard } from './guards/auth.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { CredentialsComponent } from './components/profile-base/credentials/credentials.component';
+import { OrderListComponent } from './components/profile-base/order-list/order-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -29,7 +30,8 @@ export function tokenGetter() {
     FooterBarComponent,
     RegisterComponent,
     LoginComponent,
-    CredentialsComponent
+    CredentialsComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,7 +42,12 @@ export function tokenGetter() {
       { path: '', redirectTo: 'Products', pathMatch: 'full' },
       { path: 'Registration', component: RegisterComponent },
       { path: 'Login', component: LoginComponent },
-      { path: 'Profile', component: CredentialsComponent, canActivate: [AuthGuard] }
+      {
+        path: 'Profile',
+        component: CredentialsComponent,
+        children: [{ path: 'Orders', component: OrderListComponent }],
+        canActivate: [AuthGuard]
+      }
     ]),
     ProductBaseModule,
     JwtModule.forRoot({
