@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,9 +9,11 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   private readonly http: HttpClient;
   private readonly apiURL: string = environment.baseAPIUrl + "/api/user";
+  private user: Observable<any>;
 
   constructor(http: HttpClient) {
     this.http = http;
+    this.user = this.getCurrentUser();
   }
 
   getCurrentUser() {
