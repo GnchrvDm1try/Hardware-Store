@@ -6,10 +6,11 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.css']
+  styleUrls: ['../../../../styles/forms.css']
 })
 export class EditComponent implements OnInit {
   form!: FormGroup;
+  errorMessage: string | undefined;
   user: any;
 
   private readonly userService: UserService;
