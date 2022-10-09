@@ -35,6 +35,30 @@ namespace Hardware_Store_App.Controllers
             if (user is null) return BadRequest("Couldn't find the user");
             return Ok(user);
         }
-        
+
+        [Authorize]
+        [HttpPatch("updateUserCredentials")]
+        public async Task<IActionResult> UpdateUserCredentials([FromBody] RegisterModel model)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            int id = Convert.ToInt32(HttpContext.User.FindFirst("id")!.Value);
+            User? currentUser = await context.Users.AsNoTracking().FirstAsync(u => u.Id == id);
+            User? user = await context.Users.Where(u => (u.Email == model.Email && u.Email != currentUser.Email) ||
+                (u.Phonenumber == model.PhoneNumber && u.Phonenumber != currentUser.Phonenumber)).FirstOrDefaultAsync();
+            if (user is not null)
+            {
+                if (user.Email == model.Email) return BadRequest("The user with such email is already exists");
+                if (user.Phonenumber == model.PhoneNumber) return BadRequest("The user with such phone number is already exists");
+            }
+
+            user = new User(model);
+            user.Id = id;
+            user.Registrationdate = currentUser.Registrationdate;
+            context.Users.Update(user);
+            await context.SaveChangesAsync();
+
+            return Ok("Credentials has been successfully updated");
+        }
     }
 }
