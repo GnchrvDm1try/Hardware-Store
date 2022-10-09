@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -32,6 +33,19 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  submit() {
+    this.userService.updateUserCredentials(this.form)
+      .then(success => {
+        if (success) {
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigateByUrl('Profile/Edit');
+          });
+        }
+        else this.errorMessage = "Unknown error occurred";
+      })
+      .catch((HTTPError: HttpErrorResponse) => this.errorMessage = HTTPError.error);
   }
 
   private getFormGroupInstance() {
