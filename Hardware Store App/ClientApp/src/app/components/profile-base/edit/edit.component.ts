@@ -15,6 +15,10 @@ export class EditComponent implements OnInit {
   private readonly formBuilder: FormBuilder;
   private readonly router: Router;
 
+  private currentDateTime: Date = new Date();
+  maxAllowedBirthDate: string = this.currentDateTime.getFullYear() - 6 + "-12" + "-31";
+  minAllowedBirthDate: string = this.currentDateTime.getFullYear() - 100 + "-01" + "-01";
+
   constructor(userService: UserService, formBuilder: FormBuilder, router: Router) {
     this.userService = userService;
     this.formBuilder = formBuilder;
