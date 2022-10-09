@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProductBaseModule } from './components/product-base/product-base.module';
@@ -16,8 +15,7 @@ import { ACCESS_TOKEN_KEY } from './services/auth.service';
 import { JwtExpirationInterceptor } from './interceptors/jwt-expiration.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
-import { CredentialsComponent } from './components/profile-base/credentials/credentials.component';
-import { OrderListComponent } from './components/profile-base/order-list/order-list.component';
+import { ProfileBaseModule } from './components/profile-base/profile-base.module';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -29,9 +27,7 @@ export function tokenGetter() {
     NavBarComponent,
     FooterBarComponent,
     RegisterComponent,
-    LoginComponent,
-    CredentialsComponent,
-    OrderListComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,14 +37,9 @@ export function tokenGetter() {
     RouterModule.forRoot([
       { path: '', redirectTo: 'Products', pathMatch: 'full' },
       { path: 'Registration', component: RegisterComponent },
-      { path: 'Login', component: LoginComponent },
-      {
-        path: 'Profile',
-        component: CredentialsComponent,
-        children: [{ path: 'Orders', component: OrderListComponent }],
-        canActivate: [AuthGuard]
-      }
+      { path: 'Login', component: LoginComponent }
     ]),
+    ProfileBaseModule,
     ProductBaseModule,
     JwtModule.forRoot({
       config: {
