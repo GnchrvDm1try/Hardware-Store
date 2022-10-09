@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -18,6 +19,11 @@ export class UserService {
   constructor(http: HttpClient) {
     this.http = http;
     this.user = this.getCurrentUser();
+  }
+
+  async updateUserCredentials(form: FormGroup): Promise<boolean> {
+    return await this.http.patch(this.apiURL + "/updateUserCredentials", form.getRawValue(), { observe: "response", responseType: "text" as "json" }).toPromise()
+      .then(() => true);
   }
 
   private getCurrentUser() {
