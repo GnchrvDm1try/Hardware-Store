@@ -38,7 +38,7 @@ namespace Hardware_Store_App.Controllers
 
         [Authorize]
         [HttpPatch("updateUserCredentials")]
-        public async Task<IActionResult> UpdateUserCredentials([FromBody] RegisterModel model)
+        public async Task<IActionResult> UpdateUserCredentials([FromBody] EditModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
@@ -54,6 +54,8 @@ namespace Hardware_Store_App.Controllers
 
             user = new User(model);
             user.Id = id;
+            if (model.Password is null)
+                user.Hashedpassword = currentUser.Hashedpassword;
             user.Registrationdate = currentUser.Registrationdate;
             context.Users.Update(user);
             await context.SaveChangesAsync();
