@@ -4,8 +4,14 @@
 
 :root {
   --main-red: #F34C3F;
+  --main-slate: #94A3B8;
 }
 
 body {
     min-height: 100vh;
+}
+
+app-edit {
+  margin-top: auto;
+  margin-bottom: auto;
 }

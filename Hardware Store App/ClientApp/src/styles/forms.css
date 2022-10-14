@@ -43,7 +43,7 @@ form span {
 }
 
 form div > span {
-    display: block;
+  display: block;
 }
 
 form button[disabled] {
@@ -63,5 +63,5 @@ form button[disabled] {
 }
 
 .error span {
-    padding: 4px 10px;
+  padding: 4px 10px;
 }
