@@ -26,6 +26,21 @@ namespace Hardware_Store_App.Models
             this.Address = model.Address;
             this.Roleid = 2;
         }
+        
+        public User(EditModel model)
+        {
+            this.Firstname = model.FirstName;
+            this.Lastname = model.LastName;
+            this.Email = model.Email;
+            this.Phonenumber = model.PhoneNumber;
+            this.Sex = model.Sex;
+            if (model.Birthdate != null)
+                this.Birthdate = DateOnly.FromDateTime((DateTime)model.Birthdate);
+            if (model.Password != null)
+                this.Hashedpassword = PasswordHasher.HashPassword(model.Password);
+            this.Address = model.Address;
+            this.Roleid = 2;
+        }
 
         public int Id { get; set; }
         public string Firstname { get; set; } = null!;
