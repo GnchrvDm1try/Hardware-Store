@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['../../../../styles/forms.css']
+  styleUrls: ['./edit.component.css', '../../../../styles/forms.css']
 })
 export class EditComponent implements OnInit {
   form!: FormGroup;
@@ -58,8 +58,8 @@ export class EditComponent implements OnInit {
       birthDate: new FormControl(`${this.user.birthdate.year}-${this.user.birthdate.month}-${this.user.birthdate.day}`, Validators.required),
       sex: new FormControl(this.user.sex, [Validators.required, Validators.pattern("male|female")]),
       address: new FormControl(this.user.address, Validators.minLength(7)),
-      password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&_])[A-Za-z\\d@$!%*#?&_]{8,}$")]),
-      passwordConfirm: new FormControl(null, [Validators.required])
+      password: new FormControl(null, [Validators.minLength(8), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&_])[A-Za-z\\d@$!%*#?&_]{8,}$")]),
+      passwordConfirm: new FormControl(null)
     }, { validators: this.matchValidator("password", "passwordConfirm") });
     return registrationForm;
   }
