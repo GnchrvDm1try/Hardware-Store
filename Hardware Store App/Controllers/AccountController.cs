@@ -22,6 +22,15 @@ namespace Hardware_Store_App.Controllers
             this.configuration = configuration;
         }
 
+        [HttpGet("isUserExists/{email:}")]
+        public async Task<bool> IsUserExists(string email)
+        {
+            User? user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if (user is not null)
+                return true;
+            return false;
+        }
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
