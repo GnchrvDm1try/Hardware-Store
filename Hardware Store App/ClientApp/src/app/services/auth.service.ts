@@ -34,9 +34,9 @@ export class AuthService {
     this.router = router;
   }
 
-  async register(form: FormGroup): Promise<boolean> {
-    return await this.http.post(this.APIUrl + "/register", form.getRawValue(), { observe: "response", responseType: "text" as "json" }).toPromise()
-    .then(() => true);
+  async register(form: FormGroup): Promise<boolean | undefined> {
+    await this.http.post(this.APIUrl + "/register", form.getRawValue(), { observe: "response", responseType: "text" as "json" }).toPromise();
+    return this.http.get<boolean>(this.APIUrl + `/isUserExists/${form.get('email')?.value}`).toPromise();
   }
 
   async login(form: FormGroup): Promise<boolean> {
