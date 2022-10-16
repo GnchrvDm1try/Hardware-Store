@@ -5,8 +5,8 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { catchError, Observable } from 'rxjs';
-import { ACCESS_TOKEN_KEY, AuthService } from '../services/auth.service';
+import { EMPTY, Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable()
@@ -20,11 +20,10 @@ export class JwtExpirationInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (!this.authService.isUserAuthenticated()) {
+    if (this.authService.userToken && this.jwtHelper.isTokenExpired(this.authService.userToken)) {
       this.authService.logout();
+      return EMPTY;
     }
-    // console.log(this.authService.isUserAuthenticated());
     return next.handle(request)
   }
-
 }

@@ -34,14 +34,14 @@ export class AuthService {
     this.router = router;
   }
 
-  async register(form: FormGroup): Promise<boolean> {
-    return await this.http.post(this.APIUrl + "/register", form.getRawValue(), { observe: "response", responseType: "text" as "json" }).toPromise()
-    .then(() => true);
+  async register(form: FormGroup): Promise<boolean | undefined> {
+    await this.http.post(this.APIUrl + "/register", form.getRawValue(), { observe: "response", responseType: "text" as "json" }).toPromise();
+    return this.http.get<boolean>(this.APIUrl + `/isUserExists/${form.get('email')?.value}`).toPromise();
   }
 
   async login(form: FormGroup): Promise<boolean> {
     await this.http.post<string>(this.APIUrl + "/login", form.getRawValue(), { responseType: "text" as "json" }).pipe(tap(token => this.userToken = token)).toPromise();
-    return !!this.userToken
+    return !!this.userToken && !this.jwtHelper.isTokenExpired(this.userToken);
   }
 
   isUserAuthenticated(): boolean {

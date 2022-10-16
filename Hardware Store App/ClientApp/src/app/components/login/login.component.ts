@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit {
 
   submit() {
     this.authService.login(this.form)
-      .then(success => {
-        if (success) this.router.navigate([""]);
+      .then(() => this.router.navigate([""]))
+      .catch((HTTPError: HttpErrorResponse) => {
+        if (HTTPError.status === 400) this.errorMessage = HTTPError.error
         else this.errorMessage = "Unknown error occurred";
-      })
-      .catch((HTTPError: HttpErrorResponse) => this.errorMessage = HTTPError.error);
+      });
   }
 
   private getFormGroupInstance() {
