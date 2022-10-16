@@ -34,11 +34,11 @@ export class RegisterComponent implements OnInit {
 
   submit() {
     this.authService.register(this.form)
-      .then(success => {
-        if (success) this.router.navigate(["Login"]);
+      .then(() => this.router.navigate(["Login"]))
+      .catch((HTTPError: HttpErrorResponse) => {
+        if (HTTPError.status === 400) this.errorMessage = HTTPError.error
         else this.errorMessage = "Unknown error occurred";
-      })
-      .catch((HTTPError: HttpErrorResponse) => this.errorMessage = HTTPError.error);
+      });
   }
 
   private getFormGroupInstance() {
