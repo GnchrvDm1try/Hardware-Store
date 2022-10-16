@@ -41,7 +41,7 @@ export class AuthService {
 
   async login(form: FormGroup): Promise<boolean> {
     await this.http.post<string>(this.APIUrl + "/login", form.getRawValue(), { responseType: "text" as "json" }).pipe(tap(token => this.userToken = token)).toPromise();
-    return !!this.userToken
+    return !!this.userToken && !this.jwtHelper.isTokenExpired(this.userToken);
   }
 
   isUserAuthenticated(): boolean {
