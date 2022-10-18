@@ -14,6 +14,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
 import { JwtExpirationInterceptor } from './interceptors/jwt-expiration.interceptor';
+import { AuthenticatedGuard } from './guards/authenticated.guard';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -34,8 +35,8 @@ export function tokenGetter() {
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'Products', pathMatch: 'full' },
-      { path: 'Registration', component: RegisterComponent },
-      { path: 'Login', component: LoginComponent }
+      { path: 'Registration', component: RegisterComponent, canActivate: [AuthenticatedGuard] },
+      { path: 'Login', component: LoginComponent, canActivate: [AuthenticatedGuard] }
     ]),
     ProductBaseModule,
     JwtModule.forRoot({
