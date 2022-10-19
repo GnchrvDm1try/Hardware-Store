@@ -13,7 +13,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from '../environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
 import { JwtExpirationInterceptor } from './interceptors/jwt-expiration.interceptor';
-import { AuthGuard } from './guards/auth.guard';
+import { AuthenticatedGuard } from './guards/authenticated.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ProfileBaseModule } from './components/profile-base/profile-base.module';
 
@@ -36,8 +36,8 @@ export function tokenGetter() {
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'Products', pathMatch: 'full' },
-      { path: 'Registration', component: RegisterComponent },
-      { path: 'Login', component: LoginComponent }
+      { path: 'Registration', component: RegisterComponent, canActivate: [AuthenticatedGuard] },
+      { path: 'Login', component: LoginComponent, canActivate: [AuthenticatedGuard] }
     ]),
     ProfileBaseModule,
     ProductBaseModule,
