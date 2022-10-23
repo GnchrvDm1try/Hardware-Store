@@ -42,15 +42,23 @@ export class EditComponent implements OnInit {
     }
 
     this.userService.updateUserCredentials(this.form)
-      .then(success => {
-        if (success) {
-          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-            this.router.navigateByUrl('Profile/Edit');
-          });
+      .then(() => {
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigateByUrl('Profile/Edit'))
+      })
+      .catch((HTTPError: HttpErrorResponse) => {
+        if (HTTPError.status === 400) {
+          try {
+            let errors = JSON.parse(HTTPError.error).errors
+            this.errorMessage = '';
+            for (var key in errors)
+              if (errors.hasOwnProperty(key)) this.errorMessage += ' ' + errors[key];
+          }
+          catch (e) {
+            this.errorMessage = HTTPError.error;
+          }
         }
         else this.errorMessage = "Unknown error occurred";
-      })
-      .catch((HTTPError: HttpErrorResponse) => this.errorMessage = HTTPError.error);
+      });
   }
 
   private getFormGroupInstance() {
