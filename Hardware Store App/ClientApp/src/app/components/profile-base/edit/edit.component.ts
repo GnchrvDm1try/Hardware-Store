@@ -36,6 +36,11 @@ export class EditComponent implements OnInit {
   }
 
   submit() {
+    if (!this.form.get('password')?.value || !this.form.get('passwordConfirm')?.value) {
+      this.form.get('password')?.setValue(null);
+      this.form.get('passwordConfirm')?.setValue(null);
+    }
+
     this.userService.updateUserCredentials(this.form)
       .then(success => {
         if (success) {
@@ -58,8 +63,8 @@ export class EditComponent implements OnInit {
       birthDate: new FormControl(`${this.user.birthdate.year}-${this.user.birthdate.month}-${this.user.birthdate.day}`, Validators.required),
       sex: new FormControl(this.user.sex, [Validators.required, Validators.pattern("male|female")]),
       address: new FormControl(this.user.address, Validators.minLength(7)),
-      password: new FormControl(null, [Validators.minLength(8), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&_])[A-Za-z\\d@$!%*#?&_]{8,}$")]),
-      passwordConfirm: new FormControl(null)
+      password: new FormControl('', [Validators.minLength(8), Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&_])[A-Za-z\\d@$!%*#?&_]{8,}$")]),
+      passwordConfirm: new FormControl('')
     }, { validators: this.matchValidator("password", "passwordConfirm") });
     return registrationForm;
   }
