@@ -7,12 +7,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CredentialsComponent } from './credentials/credentials.component';
 import { EditComponent } from './edit/edit.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
     CredentialsComponent,
     EditComponent,
-    OrderListComponent
+    OrderListComponent,
+    WishlistComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { OrderListComponent } from './order-list/order-list.component';
         path: 'Profile', component: CredentialsComponent,
         children: [
           { path: 'Edit', component: EditComponent },
-          { path: 'Orders', component: OrderListComponent }
+          { path: 'Orders', component: OrderListComponent },
+          { path: 'Wishlist', component: WishlistComponent }
         ]
       },
     ])
