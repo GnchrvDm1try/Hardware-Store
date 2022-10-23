@@ -54,7 +54,7 @@ namespace Hardware_Store_App.Controllers
 
             user = new User(model);
             user.Id = id;
-            if (model.Password is null)
+            if (String.IsNullOrEmpty(model.Password))
                 user.Hashedpassword = currentUser.Hashedpassword;
             user.Registrationdate = currentUser.Registrationdate;
             context.Users.Update(user);
