@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CredentialsComponent } from './credentials/credentials.component';
 import { EditComponent } from './edit/edit.component';
 import { OrderListComponent } from './order-list/order-list.component';
+import { NotAuthenticatedGuard } from '../../guards/notAuthenticated.guard';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { OrderListComponent } from './order-list/order-list.component';
     ReactiveFormsModule,
     RouterModule.forChild([
       {
-        path: 'Profile', component: CredentialsComponent,
+        path: 'Profile', component: CredentialsComponent, canActivate: [NotAuthenticatedGuard],
         children: [
           { path: 'Edit', component: EditComponent },
           { path: 'Orders', component: OrderListComponent }
