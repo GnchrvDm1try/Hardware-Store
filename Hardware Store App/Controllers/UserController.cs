@@ -31,6 +31,9 @@ namespace Hardware_Store_App.Controllers
                 .Include(u => u.Orders)!
                 .ThenInclude(o => o.Orderproducts)
                 .ThenInclude(p => p.Product)
+                .Include(u => u.Wishlists)
+                .ThenInclude(w => w.Product)
+                .ThenInclude(p => p.Category)
                 .FirstOrDefaultAsync(u => u.Id == id);
             if (user is null) return BadRequest("Couldn't find the user");
             return Ok(user);
