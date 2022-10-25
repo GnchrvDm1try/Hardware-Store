@@ -1,0 +1,17 @@
+<div class="flex w-full" *ngIf="product !== undefined">
+  <div class="w-1/3 mr-2">
+    <img class="w-full h-[15rem] rounded object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMQX3FKpxqCWFR6lqp2uXTE-khmlXtz6Xxvw&usqp=CAU" alt="Failed to load the image" />
+  </div>
+  <div class="w-2/3">
+    <h3 class="mb-2">
+      <a class="break-words text-sky-600 text-xl font-semibold" [routerLink]="['/Products/Details', product.productid]">{{product.product.name}}</a>
+      <span class="ml-2 border-[1px] border-gray-400 rounded px-[4px] text-gray-400">{{product.product.category.name}}</span>
+      <button (click)="removeWishlistItem()" class="float-right"><img class="w-7 h-7" src="/assets/icons/bucket_with_a_cross.svg" alt="Remove product" /></button>
+    </h3>
+    <p class="text-sm">Added at: {{product.additiondate.day}}.{{product.additiondate.month}}.{{product.additiondate.year}}
+      <span class="flex float-right text-base font-semibold">{{product.product.price | currency}}</span>
+    </p>
+    <br />
+    <p class="description">{{product.product.description}}</p>
+  </div>
+</div>
