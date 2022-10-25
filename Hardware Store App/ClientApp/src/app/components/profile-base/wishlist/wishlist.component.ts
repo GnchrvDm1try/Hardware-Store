@@ -18,4 +18,7 @@ export class WishlistComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  remove(id: number) {
+    this.products = this.products.filter((item: any) => item.productid !== id);
+  }
 }
