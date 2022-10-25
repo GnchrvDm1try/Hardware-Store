@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-wishlist',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wishlist.component.css']
 })
 export class WishlistComponent implements OnInit {
+  private readonly userService: UserService;
+  products: any;
 
-  constructor() { }
+  constructor(userService: UserService) {
+    this.userService = userService; 
+    this.userService.currentUser.subscribe(user => this.products = user.wishlists);
+  }
 
   ngOnInit(): void {
   }
