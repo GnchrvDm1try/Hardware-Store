@@ -65,5 +65,27 @@ namespace Hardware_Store_App.Controllers
 
             return Ok("Credentials has been successfully updated");
         }
+
+        [HttpPost("toggleWishlistItem")]
+        public async Task<IActionResult> ToggleWishlistItem([FromBody] int productId)
+        {
+            Product? product = await context.Products.FindAsync(productId);
+            if (product is null)
+                return BadRequest("There is no product with such id");
+
+            int id = Convert.ToInt32(HttpContext.User.FindFirst("id")!.Value);
+            User? currentUser = await context.Users.Include(u => u.Wishlists).AsNoTracking().FirstAsync(u => u.Id == id);
+            Wishlist? wishlistItem = currentUser.Wishlists.FirstOrDefault(w => w.Productid == productId);
+            if (wishlistItem is null)
+                await context.Wishlists.AddAsync(new Wishlist
+                {
+                    Userid = currentUser.Id,
+                    Productid = productId,
+                });
+            else
+                context.Wishlists.Remove(wishlistItem);
+            await context.SaveChangesAsync();
+            return Ok("Wishlist item has been successfully toggled");
+        }
     }
 }
