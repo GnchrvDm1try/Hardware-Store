@@ -29,4 +29,8 @@ export class UserService {
   private getCurrentUser() {
     return this.http.get(this.apiURL + "/currentUser");
   }
+
+   toggleWishlistItem(productId: number) {
+     return this.http.post(this.apiURL + "/toggleWishlistItem", productId, { responseType: "text" as "json" })
+  }
 }

@@ -10,27 +10,40 @@
     <div class="border w-[550px] h-[550px]">
       <img class="w-full h-full object-cover" src="https://c4.wallpaperflare.com/wallpaper/108/140/869/digital-digital-art-artwork-fantasy-art-drawing-hd-wallpaper-thumb.jpg" alt="Failed to load the image." />
     </div>
-    <div style="width: calc(100% - 550px)" class="pl-4 flex">
-      <div class="flex flex-col w-1/2">
-        <p>Manufacturer:</p>
-        <p>Country of production:</p>
-        <ng-container *ngFor="let specification of product.specifications">
-          <p>{{specification.name | titlecase}}</p>
-        </ng-container>
-        <div class="flex mt-auto items-center space-x-2">
-          <img class="w-8" src="assets/icons/star_icon.svg" *ngFor="let item of [].constructor(+product.rating.toFixed())">
-          <p class="font-semibold">({{product.rating}})</p>
+    <div style="width: calc(100% - 550px)" class="relative pl-4">
+      <div class="flex">
+        <div class="flex flex-col w-1/2">
+          <p>Manufacturer:</p>
+          <p>Country of production:</p>
+          <ng-container *ngFor="let specification of product.specifications">
+            <p>{{specification.name | titlecase}}</p>
+          </ng-container>
+        </div>
+
+        <div class="flex flex-col w-1/2 text-right">
+          <p>{{product.manufacturer.name}}</p>
+          <p>{{product.countryproducer.name}}</p>
+          <ng-container *ngFor="let specification of product.specifications">
+            <p>{{specification.value}}</p>
+          </ng-container>
         </div>
       </div>
 
-      <div class="flex flex-col w-1/2 text-right">
-        <p>{{product.manufacturer.name}}</p>
-        <p>{{product.countryproducer.name}}</p>
-        <ng-container *ngFor="let specification of product.specifications">
-          <p>{{specification.value}}</p>
+      <div class="flex w-full justify-between items-center absolute bottom-0">
+        <div class="flex items-center space-x-2">
+          <img class="w-8" src="assets/icons/star_icon.svg" *ngFor="let item of [].constructor(+product.rating.toFixed())">
+          <p class="font-semibold">({{product.rating}})</p>
+        </div>
+        <ng-container *ngIf="isUserAuthenticated">
+          <button (click)="toggleWishlistItem()" *ngIf="isInWishlist; else notInWishlist">
+            <img class="w-6 h-6" src="assets/icons/heart_filled_icon.svg" />
+          </button>
+          <ng-template #notInWishlist>
+            <button (click)="toggleWishlistItem()"><img class="w-6 h-6" src="assets/icons/heart_unfilled_icon.svg" /></button>
+          </ng-template>
         </ng-container>
-        <p class="mt-auto font-semibold">{{product.price | currency}}</p>
-      </div>
+          <p class="font-semibold">{{product.price | currency}}</p>
+        </div>
     </div>
   </div>
 
