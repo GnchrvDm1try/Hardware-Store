@@ -47,4 +47,8 @@ export class ProductDetailComponent implements OnInit {
         if (user.wishlists[i].productid == this.product.id) { this.isInWishlist = true; break }
     });
   }
+
+  toggleWishlistItem() {
+    this.userService.toggleWishlistItem(this.product.id as number).subscribe(() => this.isInWishlist = !this.isInWishlist);
+  }
 }
