@@ -13,7 +13,7 @@ namespace Hardware_Store_App.Models
             Wishlists = new HashSet<Wishlist>();
         }
 
-        public User(RegisterModel model)
+        public User(RegisterModel model) : this()
         {
             this.Firstname = model.FirstName;
             this.Lastname = model.LastName;
@@ -27,7 +27,7 @@ namespace Hardware_Store_App.Models
             this.Roleid = 2;
         }
         
-        public User(EditModel model)
+        public User(EditModel model) : this()
         {
             this.Firstname = model.FirstName;
             this.Lastname = model.LastName;
@@ -56,8 +56,8 @@ namespace Hardware_Store_App.Models
         public int? Roleid { get; set; }
 
         public virtual Role? Role { get; set; }
-        public virtual ICollection<Order>? Orders { get; set; }
-        public virtual ICollection<Review>? Reviews { get; set; }
-        public virtual ICollection<Wishlist>? Wishlists { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Wishlist> Wishlists { get; set; }
     }
 }

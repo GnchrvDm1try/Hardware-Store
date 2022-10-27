@@ -11,6 +11,7 @@ namespace Hardware_Store_App.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly StoreContext context;
@@ -20,7 +21,6 @@ namespace Hardware_Store_App.Controllers
             this.context = context;
         }
 
-        [Authorize]
         [HttpGet("currentUser")]
         public async Task<IActionResult> GetCurrentUser()
         {
@@ -36,7 +36,6 @@ namespace Hardware_Store_App.Controllers
             return Ok(user);
         }
 
-        [Authorize]
         [HttpPatch("updateUserCredentials")]
         public async Task<IActionResult> UpdateUserCredentials([FromBody] EditModel model)
         {
