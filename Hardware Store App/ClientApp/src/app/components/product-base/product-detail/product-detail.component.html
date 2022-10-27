@@ -34,14 +34,16 @@
           <img class="w-8" src="assets/icons/star_icon.svg" *ngFor="let item of [].constructor(+product.rating.toFixed())">
           <p class="font-semibold">({{product.rating}})</p>
         </div>
-        <button (click)="toggleWishlistItem()" *ngIf="isInWishlist; else notInWishlist">
-          <img class="w-6 h-6" src="assets/icons/heart_filled_icon.svg" />
-        </button>
-        <ng-template #notInWishlist>
-          <button (click)="toggleWishlistItem()"><img class="w-6 h-6" src="assets/icons/heart_unfilled_icon.svg" /></button>
-        </ng-template>
-        <p class="font-semibold">{{product.price | currency}}</p>
-      </div>
+        <ng-container *ngIf="isUserAuthenticated">
+          <button (click)="toggleWishlistItem()" *ngIf="isInWishlist; else notInWishlist">
+            <img class="w-6 h-6" src="assets/icons/heart_filled_icon.svg" />
+          </button>
+          <ng-template #notInWishlist>
+            <button (click)="toggleWishlistItem()"><img class="w-6 h-6" src="assets/icons/heart_unfilled_icon.svg" /></button>
+          </ng-template>
+        </ng-container>
+          <p class="font-semibold">{{product.price | currency}}</p>
+        </div>
     </div>
   </div>
 

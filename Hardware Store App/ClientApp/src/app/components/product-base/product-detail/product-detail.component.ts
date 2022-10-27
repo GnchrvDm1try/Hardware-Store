@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from '../../../services/product.service';
 import { UserService } from '../../../services/user.service';
 
@@ -13,14 +14,20 @@ export class ProductDetailComponent implements OnInit {
   private readonly route: ActivatedRoute;
   private readonly productService: ProductService;
   private readonly userService: UserService;
+  private readonly authService: AuthService;
   isInWishlist: boolean = false;
   product: any;
   reviews: any;
 
-  constructor(route: ActivatedRoute, productService: ProductService, userService: UserService) {
+  get isUserAuthenticated() {
+    return this.authService.isUserAuthenticated();
+  }
+
+  constructor(route: ActivatedRoute, productService: ProductService, userService: UserService, authService: AuthService) {
     this.route = route;
     this.productService = productService;
     this.userService = userService;
+    this.authService = authService;
   }
 
   ngOnInit(): void {
@@ -32,7 +39,8 @@ export class ProductDetailComponent implements OnInit {
     const productId = +this.route.snapshot.paramMap.get('id')!;
     this.productService.getProduct(productId).subscribe(data => {
       this.product = data;
-      this.checkIfInWishlist();
+      if (this.isUserAuthenticated)
+        this.checkIfInWishlist();
     });
   }
 
