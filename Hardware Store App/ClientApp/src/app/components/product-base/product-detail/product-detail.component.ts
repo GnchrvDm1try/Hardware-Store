@@ -10,16 +10,16 @@ import { UserService } from '../../../services/user.service';
 })
 export class ProductDetailComponent implements OnInit {
 
-  private route: ActivatedRoute;
-  private service: ProductService;
+  private readonly route: ActivatedRoute;
+  private readonly productService: ProductService;
   private readonly userService: UserService;
   isInWishlist: boolean = false;
   product: any;
   reviews: any;
 
-  constructor(service: ProductService, route: ActivatedRoute, userService: UserService) {
-    this.service = service;
+  constructor(route: ActivatedRoute, productService: ProductService, userService: UserService) {
     this.route = route;
+    this.productService = productService;
     this.userService = userService;
   }
 
@@ -30,7 +30,7 @@ export class ProductDetailComponent implements OnInit {
 
   getProduct() {
     const productId = +this.route.snapshot.paramMap.get('id')!;
-    this.service.getProduct(productId).subscribe(data => {
+    this.productService.getProduct(productId).subscribe(data => {
       this.product = data;
       this.checkIfInWishlist();
     });
@@ -38,7 +38,7 @@ export class ProductDetailComponent implements OnInit {
 
   getReviews() {
     const productId = +this.route.snapshot.paramMap.get('id')!;
-    this.service.getReviews(productId).subscribe(data => this.reviews = data);
+    this.productService.getReviews(productId).subscribe(data => this.reviews = data);
   }
 
   checkIfInWishlist() {
