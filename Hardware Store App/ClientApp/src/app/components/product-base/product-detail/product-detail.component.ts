@@ -51,12 +51,28 @@ export class ProductDetailComponent implements OnInit {
 
   checkIfInWishlist() {
     this.userService.currentUser.subscribe(user => {
-      for (let i = 0; i < user.wishlists.length; i++)
-        if (user.wishlists[i].productid == this.product.id) { this.isInWishlist = true; break }
-    });
+      if (this.findProductInWishlist(user.wishlists.sort((a: any, b: any) => a.productid - b.productid), this.product.id) !== -1)
+        this.isInWishlist = true;
+    })
   }
 
   toggleWishlistItem() {
     this.userService.toggleWishlistItem(this.product.id as number).subscribe(() => this.isInWishlist = !this.isInWishlist);
+  }
+
+  private findProductInWishlist(wishlist: any[], target: number) {
+    let leftBoundary: number = 0;
+    let rigthBoundary: number = wishlist.length - 1;
+
+    while (leftBoundary < rigthBoundary) {
+      const indexOfArrayMiddle: number = Math.floor((leftBoundary + rigthBoundary) / 2);
+
+      if (wishlist[indexOfArrayMiddle].productid === target) {
+        return indexOfArrayMiddle;
+      }
+      if (target < wishlist[indexOfArrayMiddle].productid) rigthBoundary = indexOfArrayMiddle - 1;
+      else leftBoundary = indexOfArrayMiddle + 1;
+    }
+    return -1;
   }
 }
