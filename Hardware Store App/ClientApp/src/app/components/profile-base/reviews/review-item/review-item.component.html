@@ -1,0 +1,14 @@
+<div class="flex">
+    <div class="w-[97%]">
+        <a class="break-words text-sky-600 text-xl font-semibold" [routerLink]="['/Products/Details', review.productid]">{{review.product.name}}</a>
+        <p class="text-sm">{{dateTime}}</p>
+        <div class="flex space-x-1">
+            <img class="h-5 w-5" src="assets/icons/star_icon.svg" *ngFor="let item of [].constructor(+review.product.rating.toFixed())">
+        </div>
+        <p class="text-justify pr-2 text-ellipsis overflow-hidden">{{review.comment}}</p>
+    </div>
+    <div class="w-[3%] space-y-4">
+        <button class="w-full" (click)="removeReview()"><img src="/assets/icons/bucket_with_a_cross.svg" alt="Remove product" /></button>
+        <button class="w-full"><img src="/assets/icons/edit_icon.svg" alt="Remove product" /></button>
+    </div>
+</div>
