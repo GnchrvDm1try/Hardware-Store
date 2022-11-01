@@ -11,6 +11,7 @@ import { OrderListComponent } from './order-list/order-list.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { WishlistItemComponent } from './wishlist/wishlist-item/wishlist-item.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewItemComponent } from './reviews/review-item/review-item.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ReviewsComponent } from './reviews/reviews.component';
     OrderListComponent,
     WishlistComponent,
     WishlistItemComponent,
-    ReviewsComponent
+    ReviewsComponent,
+    ReviewItemComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { ReviewsComponent } from './reviews/reviews.component';
         children: [
           { path: 'Edit', component: EditComponent },
           { path: 'Orders', component: OrderListComponent },
-          { path: 'Wishlist', component: WishlistComponent }
+          { path: 'Wishlist', component: WishlistComponent },
+          { path: 'Reviews', component: ReviewsComponent }
         ]
       },
     ])
