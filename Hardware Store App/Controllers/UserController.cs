@@ -26,6 +26,8 @@ namespace Hardware_Store_App.Controllers
         {
             int id = Convert.ToInt32(HttpContext.User.FindFirst("id")!.Value);
             User? user = await this.context.Users
+                .Include(u => u.Reviews)
+                .ThenInclude(r => r.Product)
                 .Include(u => u.Orders)!
                 .ThenInclude(o => o.Status)
                 .Include(u => u.Orders)!
