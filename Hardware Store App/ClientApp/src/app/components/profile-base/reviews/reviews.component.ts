@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-reviews',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reviews.component.css']
 })
 export class ReviewsComponent implements OnInit {
+  private readonly userService: UserService;
 
-  constructor() { }
+  reviews: any;
+
+  constructor(userService: UserService) {
+    this.userService = userService;
+    this.userService.currentUser.subscribe(user => this.reviews = user.reviews);
+  }
 
   ngOnInit(): void {
   }
-
 }
