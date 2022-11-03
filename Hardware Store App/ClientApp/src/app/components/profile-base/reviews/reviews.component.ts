@@ -18,4 +18,8 @@ export class ReviewsComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  remove(id: number) {
+    this.reviews = this.reviews.filter((item: any) => item.id !== id);
+  }
 }
