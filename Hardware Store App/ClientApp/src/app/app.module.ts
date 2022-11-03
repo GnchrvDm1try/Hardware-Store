@@ -16,6 +16,7 @@ import { JwtExpirationInterceptor } from './interceptors/jwt-expiration.intercep
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ProfileBaseModule } from './components/profile-base/profile-base.module';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -27,7 +28,8 @@ export function tokenGetter() {
     NavBarComponent,
     FooterBarComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ReviewFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
