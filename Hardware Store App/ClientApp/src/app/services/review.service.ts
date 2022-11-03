@@ -12,4 +12,8 @@ export class ReviewService {
   constructor(http: HttpClient) {
     this.http = http;
   }
+
+  delete(id: number) {
+    return this.http.delete(this.apiURL + '/delete', { body: id, responseType: "text" as "json" });
+  }
 }
