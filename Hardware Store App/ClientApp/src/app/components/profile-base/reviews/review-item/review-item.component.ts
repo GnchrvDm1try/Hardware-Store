@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ReviewService } from 'src/app/services/review.service';
 
 @Component({
   selector: 'app-review-item',
@@ -7,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ReviewItemComponent implements OnInit {
   @Input() review: any;
+  @Output() removeEvent: any = new EventEmitter<any>();
+  private readonly reviewService: ReviewService;
   private reviewDateTime: Date | undefined;
 
   get dateTime() {
@@ -14,10 +17,15 @@ export class ReviewItemComponent implements OnInit {
       ${this.reviewDateTime?.getDate()?.toString()?.padStart(2, '0')}.${this.reviewDateTime?.getMonth()?.toString()?.padStart(2, '0')}.${this.reviewDateTime?.getFullYear()}`;
   }
 
-  constructor() {
+  constructor(reviewService: ReviewService) {
+    this.reviewService = reviewService;
   }
 
   ngOnInit(): void {
     this.reviewDateTime = new Date(this.review.reviewdate)
+  }
+
+  removeReview() {
+    this.reviewService.delete(this.review.id).subscribe(() => this.removeEvent.emit());
   }
 }
