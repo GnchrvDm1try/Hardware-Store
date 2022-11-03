@@ -19,5 +19,17 @@ namespace Hardware_Store_App.Controllers
         {
             this.context = context;
         }
+        
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete([FromBody] int id)
+        {
+            Review? review = await context.Reviews.FindAsync(id);
+
+            if (review is null) return BadRequest("Couldn't find review");
+
+            context.Reviews.Remove(review);
+            await context.SaveChangesAsync();
+            return Ok("Review has been deleted");
+        }
     }
 }
