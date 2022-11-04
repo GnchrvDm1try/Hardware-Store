@@ -2,13 +2,31 @@
     <div class="w-[97%]">
         <a class="break-words text-sky-600 text-xl font-semibold" [routerLink]="['/Products/Details', review.productid]">{{review.product.name}}</a>
         <p class="text-sm">{{dateTime}}</p>
-        <div class="flex space-x-1">
-            <img class="h-5 w-5" src="assets/icons/star_icon.svg" *ngFor="let item of [].constructor(+review.product.rating.toFixed())">
-        </div>
-        <p class="text-justify pr-2 text-ellipsis overflow-hidden">{{review.comment}}</p>
+        <ng-container *ngIf="!isEditing; else editing">
+            <div class="flex space-x-1">
+                <img class="h-5 w-5" src="assets/icons/star_icon.svg" *ngFor="let item of [].constructor(+estimation.toFixed())">
+            </div>
+            <p class="text-justify pr-2 text-ellipsis overflow-hidden">{{review.comment}}</p>
+        </ng-container>
+        <ng-template #editing>
+            <form [formGroup]="form" id="editForm" method="post">
+                <div class="flex space-x-1" >
+                    <ng-container *ngFor="let item of [].constructor(+estimation.toFixed()); let i=index">
+                        <img class="h-5 w-5 hover:cursor-pointer" src="assets/icons/star_icon.svg" (click)="changeEstimation(i)">
+                    </ng-container>
+                    <ng-container *ngFor="let item of [].constructor(5-+estimation.toFixed()); let i=index">
+                        <img class="h-5 w-5 opacity-50 hover:cursor-pointer" src="assets/icons/star_icon.svg" (click)="changeEstimation(i++estimation.toFixed())">
+                    </ng-container>
+                </div>
+                <div class="pr-2">
+                    <textarea class="border w-full" rows="5" formControlName="comment"></textarea>
+                </div>
+            </form>
+        </ng-template>
     </div>
     <div class="w-[3%] space-y-4">
-        <button class="w-full" (click)="removeReview()"><img src="/assets/icons/bucket_with_a_cross.svg" alt="Remove product" /></button>
-        <button class="w-full"><img src="/assets/icons/edit_icon.svg" alt="Remove product" /></button>
+        <button class="w-full" (click)="removeReview()"><img src="/assets/icons/bucket_with_a_cross.svg" alt="Delete" /></button>
+        <button class="w-full" (click)="isEditing=!isEditing"><img src="/assets/icons/edit_icon.svg" alt="Edit" /></button>
+        <button type="submit" form="editForm" (click)="saveChanges()" *ngIf="isEditing"><img src="/assets/icons/save_icon.svg" alt="Save" /></button>
     </div>
 </div>
