@@ -11,6 +11,8 @@ export class ReviewItemComponent implements OnInit {
   @Output() removeEvent: any = new EventEmitter<any>();
   private readonly reviewService: ReviewService;
   private reviewDateTime: Date | undefined;
+  isEditing: boolean = false;
+  estimation: number = 1;
 
   get dateTime() {
     return `${this.reviewDateTime?.getHours().toString().padStart(2, '0')}:${this.reviewDateTime?.getMinutes().toString().padStart(2, '0')}
@@ -22,10 +24,15 @@ export class ReviewItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reviewDateTime = new Date(this.review.reviewdate)
+    this.reviewDateTime = new Date(this.review.reviewdate);
+    this.estimation = this.review.estimation;
   }
 
   removeReview() {
     this.reviewService.delete(this.review.id).subscribe(() => this.removeEvent.emit());
+  }
+
+  changeEstimation(index: number) {
+    this.estimation = index + 1;
   }
 }
