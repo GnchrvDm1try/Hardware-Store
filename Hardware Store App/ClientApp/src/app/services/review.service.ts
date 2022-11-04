@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,6 +12,10 @@ export class ReviewService {
 
   constructor(http: HttpClient) {
     this.http = http;
+  }
+
+  edit(form: FormGroup) {
+    return this.http.patch(this.apiURL + '/edit', form.getRawValue(), { observe: "response", responseType: "text" as "json" });
   }
 
   delete(id: number) {
