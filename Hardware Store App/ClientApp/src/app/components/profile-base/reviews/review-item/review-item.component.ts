@@ -41,6 +41,15 @@ export class ReviewItemComponent implements OnInit {
     this.estimation = index + 1;
   }
 
+  saveChanges() {
+    this.form.get('estimation')?.setValue(this.estimation);
+    this.reviewService.edit(this.form).subscribe(() => {
+      this.isEditing = false;
+      this.review.estimation = this.estimation;
+      this.review.comment = this.form.get('comment')?.value;
+    });
+  }
+
   private getFormGroupInstance() {
     let editForm: FormGroup;
     editForm = this.formBuilder.group({
