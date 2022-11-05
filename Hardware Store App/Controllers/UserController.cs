@@ -33,6 +33,7 @@ namespace Hardware_Store_App.Controllers
                 .Include(u => u.Orders)!
                 .ThenInclude(o => o.Orderproducts)
                 .ThenInclude(p => p.Product)
+                .ThenInclude(p => p.Category).AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Id == id);
             if (user is null) return BadRequest("Couldn't find the user");
             user.Wishlists = await context.Wishlists.Where(w => w.Userid == user.Id)
