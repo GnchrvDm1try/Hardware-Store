@@ -9,6 +9,12 @@ export class OrderItemComponent implements OnInit {
   @Input() order: any;
   date: Date = new Date();
 
+  get totalPrice() {
+    let result = 0;
+    this.order.orderproducts.forEach((item: any) => result += item.price)
+    return result;
+  }
+
   constructor() {
   }
 

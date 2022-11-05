@@ -21,10 +21,4 @@ export class OrdersComponent implements OnInit {
   orderDate(order: any): string[] {
     return order.orderdate.split('T')[0].split('-');
   }
-
-  orderTotalPrice(order: any) {
-    let result = 0;
-    order.orderproducts.forEach((item: any) => result += item.price)
-    return result;
-  }
 }
