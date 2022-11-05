@@ -7,10 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class OrderItemComponent implements OnInit {
   @Input() order: any;
+  date: Date = new Date();
 
   constructor() {
   }
 
   ngOnInit(): void {
+    this.date = new Date(this.order.orderdate);
   }
 }
