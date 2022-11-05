@@ -7,9 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotAuthenticatedGuard } from '../../guards/notAuthenticated.guard';
 import { CredentialsComponent } from './credentials/credentials.component';
 import { EditComponent } from './edit/edit.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 import { OrdersComponent } from './orders/orders.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
-import { WishlistItemComponent } from './wishlist/wishlist-item/wishlist-item.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewItemComponent } from './reviews/review-item/review-item.component';
 
@@ -17,9 +17,9 @@ import { ReviewItemComponent } from './reviews/review-item/review-item.component
   declarations: [
     CredentialsComponent,
     EditComponent,
+    ProductCardComponent,
     OrdersComponent,
     WishlistComponent,
-    WishlistItemComponent,
     ReviewsComponent,
     ReviewItemComponent
   ],
