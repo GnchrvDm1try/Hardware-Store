@@ -9,6 +9,7 @@ import { CredentialsComponent } from './credentials/credentials.component';
 import { EditComponent } from './edit/edit.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { OrdersComponent } from './orders/orders.component';
+import { OrderItemComponent } from './orders/order-item/order-item.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewItemComponent } from './reviews/review-item/review-item.component';
@@ -19,6 +20,7 @@ import { ReviewItemComponent } from './reviews/review-item/review-item.component
     EditComponent,
     ProductCardComponent,
     OrdersComponent,
+    OrderItemComponent,
     WishlistComponent,
     ReviewsComponent,
     ReviewItemComponent
