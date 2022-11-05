@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.css']
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.css']
 })
-export class OrderListComponent implements OnInit {
+export class OrdersComponent implements OnInit {
   private readonly userService: UserService;
   orders: any;
 

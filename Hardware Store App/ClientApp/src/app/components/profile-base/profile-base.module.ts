@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotAuthenticatedGuard } from '../../guards/notAuthenticated.guard';
 import { CredentialsComponent } from './credentials/credentials.component';
 import { EditComponent } from './edit/edit.component';
-import { OrderListComponent } from './order-list/order-list.component';
+import { OrdersComponent } from './orders/orders.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { WishlistItemComponent } from './wishlist/wishlist-item/wishlist-item.component';
 import { ReviewsComponent } from './reviews/reviews.component';
@@ -17,7 +17,7 @@ import { ReviewItemComponent } from './reviews/review-item/review-item.component
   declarations: [
     CredentialsComponent,
     EditComponent,
-    OrderListComponent,
+    OrdersComponent,
     WishlistComponent,
     WishlistItemComponent,
     ReviewsComponent,
@@ -34,7 +34,7 @@ import { ReviewItemComponent } from './reviews/review-item/review-item.component
         path: 'Profile', component: CredentialsComponent, canActivate: [NotAuthenticatedGuard],
         children: [
           { path: 'Edit', component: EditComponent },
-          { path: 'Orders', component: OrderListComponent },
+          { path: 'Orders', component: OrdersComponent },
           { path: 'Wishlist', component: WishlistComponent },
           { path: 'Reviews', component: ReviewsComponent }
         ]
@@ -45,7 +45,7 @@ import { ReviewItemComponent } from './reviews/review-item/review-item.component
     RouterModule,
     CredentialsComponent,
     EditComponent,
-    OrderListComponent
+    OrdersComponent
   ]
 })
 export class ProfileBaseModule { }
