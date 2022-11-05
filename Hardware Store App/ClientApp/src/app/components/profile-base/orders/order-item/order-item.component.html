@@ -1,0 +1,13 @@
+<div class="flex justify-between">
+  <div class="flex justify-between w-[93%]">
+    <p>{{date.getDate().toString().padStart(2, '0')}}.{{date.getMonth().toString().padStart(2, '0')}}.{{date.getFullYear()}}</p>
+    <p>{{order.status.title}}</p>
+    <p>{{totalPrice | currency}}</p>
+  </div>
+  <img class="w-[3%] rotate-[270deg] hover:cursor-pointer" src="assets/icons/dropdown_icon.svg" alt="See more/less" (click)="isExpanded = !isExpanded" />
+</div>
+<div *ngIf="isExpanded">
+  <div class="border-[1px] rounded mt-2 p-2" style="border-color: var(--main-slate)" *ngFor="let product of order.orderproducts">
+    <app-product-card [product]="product"></app-product-card>
+  </div>
+</div>

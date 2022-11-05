@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class OrderItemComponent implements OnInit {
   @Input() order: any;
   date: Date = new Date();
+  isExpanded: boolean = false;
 
   get totalPrice() {
     let result = 0;
