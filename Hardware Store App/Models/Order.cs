@@ -14,6 +14,7 @@ namespace Hardware_Store_App.Models
         public DateTime Orderdate { get; set; }
         public int? Userid { get; set; }
         public int Statusid { get; set; }
+        public string Address { get; set; } = null!;
 
         public virtual Status Status { get; set; } = null!;
         public virtual User? User { get; set; }
