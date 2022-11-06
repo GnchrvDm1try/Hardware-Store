@@ -1,10 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { OrderStatuses } from '../../../../models/enums/order-statuses'
 
 @Component({
   selector: 'app-order-item',
   templateUrl: './order-item.component.html',
-  styleUrls: ['./order-item.component.css']
+  styleUrls: ['./order-item.component.css'],
+  animations: [
+    trigger('rotatedState', [
+      state('false', style({ transform: 'rotate(0)' })),
+      state('true', style({ transform: 'rotate(-180deg)' })),
+      transition('false => true', animate('300ms ease-in')),
+      transition('true => false', animate('200ms ease-out'))
+    ])
+  ]
 })
 export class OrderItemComponent implements OnInit {
   @Input() order: any;
