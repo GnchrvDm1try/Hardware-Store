@@ -1,7 +1,7 @@
 <div class="flex justify-between">
   <div class="flex justify-between w-[93%]">
     <p>{{date.getDate().toString().padStart(2, '0')}}.{{date.getMonth().toString().padStart(2, '0')}}.{{date.getFullYear()}}</p>
-    <p>{{order.status.title}}</p>
+    <p class="px-2 rounded" [ngClass]="statusColorStyle">{{order.status.title}}</p>
     <p>{{totalPrice | currency}}</p>
   </div>
   <img class="w-[3%] rotate-[270deg] hover:cursor-pointer" src="assets/icons/dropdown_icon.svg" alt="See more/less" (click)="isExpanded = !isExpanded" />

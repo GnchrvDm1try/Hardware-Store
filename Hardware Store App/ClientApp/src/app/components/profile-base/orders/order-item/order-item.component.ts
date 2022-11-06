@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { OrderStatuses } from '../../../../models/enums/order-statuses'
 
 @Component({
   selector: 'app-order-item',
@@ -9,6 +10,7 @@ export class OrderItemComponent implements OnInit {
   @Input() order: any;
   date: Date = new Date();
   isExpanded: boolean = false;
+  statusColorStyle: string = '';
 
   get totalPrice() {
     let result = 0;
@@ -21,5 +23,15 @@ export class OrderItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.date = new Date(this.order.orderdate);
+    this.applyStatusColor();
+  }
+
+  applyStatusColor() {
+    if (this.order.status.title === OrderStatuses.Completed)
+      this.statusColorStyle += 'bg-green-500';
+    else if (this.order.status.title === OrderStatuses.Canceled)
+      this.statusColorStyle += 'bg-red-500';
+    else
+      this.statusColorStyle += 'bg-yellow-400';
   }
 }
