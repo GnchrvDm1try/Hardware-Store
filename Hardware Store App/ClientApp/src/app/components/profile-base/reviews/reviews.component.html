@@ -1,11 +1,10 @@
 <ng-container *ngIf="!!reviews && reviews.length !== 0; else empty">
-    <div class="border-[1px] rounded m-2 p-2" style="border-color: var(--main-slate)" *ngFor="let review of reviews">
-      <app-review-item [review]="review" (removeEvent)="remove(review.id)"></app-review-item>
-    </div>
-  </ng-container>
-  <ng-template #empty>
-    <div class="flex items-center justify-center" style="height: calc(100vh - 112px);">
-      <p class="text-xl font-medium">The list of reviews is empty</p>
-    </div>
-  </ng-template>
-  
+  <div class="border-[1px] rounded m-2 p-2" style="border-color: var(--main-slate)" *ngFor="let review of reviews">
+    <app-review-item [review]="review" (removeEvent)="remove(review.id)"></app-review-item>
+  </div>
+</ng-container>
+<ng-template #empty>
+  <div class="flex items-center justify-center" style="height: calc(100vh - 112px);">
+    <p class="text-xl font-medium">The list of reviews is empty</p>
+  </div>
+</ng-template>

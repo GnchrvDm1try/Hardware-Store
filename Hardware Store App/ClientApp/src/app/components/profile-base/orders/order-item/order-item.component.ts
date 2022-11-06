@@ -23,7 +23,7 @@ export class OrderItemComponent implements OnInit {
 
   get totalPrice() {
     let result = 0;
-    this.order.orderproducts.forEach((item: any) => result += item.price)
+    this.order.orderproducts.forEach((item: any) => result += item.price);
     return result;
   }
 

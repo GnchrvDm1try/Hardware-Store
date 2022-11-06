@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -16,9 +16,5 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
-
-  orderDate(order: any): string[] {
-    return order.orderdate.split('T')[0].split('-');
   }
 }
