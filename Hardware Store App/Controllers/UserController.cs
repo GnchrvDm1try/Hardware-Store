@@ -28,14 +28,18 @@ namespace Hardware_Store_App.Controllers
             User? user = await this.context.Users
                 .Include(u => u.Reviews)
                 .ThenInclude(r => r.Product)
-                .Include(u => u.Orders)!
-                .ThenInclude(o => o.Status)
-                .Include(u => u.Orders)!
-                .ThenInclude(o => o.Orderproducts)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
+            if (user is null) return BadRequest("Couldn't find the user");
+
+            user.Orders = await context.Orders.Where(o => o.Userid == user.Id)
+                .Include(o => o.Status)
+                .Include(o => o.Orderproducts)
                 .ThenInclude(p => p.Product)
                 .ThenInclude(p => p.Category).AsNoTracking()
-                .FirstOrDefaultAsync(u => u.Id == id);
-            if (user is null) return BadRequest("Couldn't find the user");
+                .OrderByDescending(o => o.Orderdate)
+                .ToListAsync();
+
             user.Wishlists = await context.Wishlists.Where(w => w.Userid == user.Id)
                 .Include(w => w.Product)
                 .ThenInclude(p => p.Category).AsNoTracking()
