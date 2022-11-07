@@ -172,6 +172,9 @@ BundleArtifacts/
 # Visual Studio Code settings
 .vscode/
 
+# Rider settings
+.idea/
+
 # Others
 ClientBin/
 ~$*
