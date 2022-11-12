@@ -22,6 +22,9 @@ export class OrderItemComponent implements OnInit {
   date: Date = new Date();
   form!: FormGroup;
   statusColorStyle: string = '';
+  isExpanded: boolean = false;
+  isEditing: boolean = false;
+  isAllowedToEdit = false;
 
   get totalPrice() {
     let result = 0;
@@ -37,6 +40,8 @@ export class OrderItemComponent implements OnInit {
     this.date = new Date(this.order.orderdate);
     this.form = this.getFormGroupInstance();
     this.applyStatusColor();
+    if (this.order.statusid !== OrderStatuses.Completed && this.order.statusid !== OrderStatuses.Canceled && this.order.statusid !== OrderStatuses.Returned)
+      this.isAllowedToEdit = true;
   }
 
   private getFormGroupInstance() {
