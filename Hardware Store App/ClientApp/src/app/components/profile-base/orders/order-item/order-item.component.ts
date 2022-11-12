@@ -44,6 +44,11 @@ export class OrderItemComponent implements OnInit {
       this.isAllowedToEdit = true;
   }
 
+
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+    if (this.isEditing) this.form.get('address')?.setValue(this.order.address);
+  }
   private getFormGroupInstance() {
     let editForm: FormGroup;
     editForm = this.formBuilder.group({
