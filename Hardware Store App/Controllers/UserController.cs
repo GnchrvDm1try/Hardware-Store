@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Hardware_Store_App.Models;
+using Hardware_Store_App.Models.Enums;
 
 namespace Hardware_Store_App.Controllers
 {
@@ -72,6 +73,29 @@ namespace Hardware_Store_App.Controllers
             await context.SaveChangesAsync();
 
             return Ok("Credentials has been successfully updated");
+        }
+
+        [HttpPatch("updateOrder")]
+        public async Task<IActionResult> UpdateOrder([FromBody] Order order)
+        {
+            Order? orderFromDB = await context.Orders.AsNoTracking().FirstOrDefaultAsync(o => o.Id == order.Id);
+            if (orderFromDB is null) return BadRequest("Couldn't find order");
+
+            order.Userid = orderFromDB.Userid;
+            int userId = Convert.ToInt32(HttpContext.User.FindFirst("id")!.Value);
+            if (order.Userid != userId) return Unauthorized("Inappropriate user");
+
+            if (order.Statusid == 0)
+                order.Statusid = orderFromDB.Statusid;
+            else if (order.Statusid != (int)OrderStatuses.Canceled)
+                return BadRequest("You are allowed to set only canceled status (statusid = 1)");
+            
+            order.Orderdate = orderFromDB.Orderdate;
+
+            context.Orders.Update(order);
+            await context.SaveChangesAsync();
+
+            return Ok("Order has been successfully updated");
         }
 
         [HttpPost("toggleWishlistItem")]
