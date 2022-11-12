@@ -30,7 +30,11 @@ export class UserService {
     return this.http.get(this.apiURL + "/currentUser");
   }
 
-   toggleWishlistItem(productId: number) {
-     return this.http.post(this.apiURL + "/toggleWishlistItem", productId, { responseType: "text" as "json" })
+  updateOrder(form: FormGroup) {
+    return this.http.patch(this.apiURL + "/updateOrder", form.getRawValue(), { responseType: "text" as "json" });
+  }
+
+  toggleWishlistItem(productId: number) {
+    return this.http.post(this.apiURL + "/toggleWishlistItem", productId, { responseType: "text" as "json" });
   }
 }
