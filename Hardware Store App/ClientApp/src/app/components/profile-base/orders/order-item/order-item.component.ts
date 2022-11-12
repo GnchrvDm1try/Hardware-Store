@@ -35,12 +35,12 @@ export class OrderItemComponent implements OnInit {
     this.applyStatusColor();
   }
 
-  applyStatusColor() {
-    if (this.order.status.title === OrderStatuses.Completed)
-      this.statusColorStyle += 'bg-green-500';
-    else if (this.order.status.title === OrderStatuses.Canceled)
-      this.statusColorStyle += 'bg-red-500';
+  private applyStatusColor() {
+    if (this.order.status.title === OrderStatuses[OrderStatuses.Completed])
+      this.statusColorStyle = 'bg-green-500';
+    else if (this.order.status.title === OrderStatuses[OrderStatuses.Canceled] || this.order.status.title === OrderStatuses[OrderStatuses.Returned])
+      this.statusColorStyle = 'bg-red-500';
     else
-      this.statusColorStyle += 'bg-yellow-400';
+      this.statusColorStyle = 'bg-yellow-400';
   }
 }
