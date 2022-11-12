@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { OrderStatuses } from '../../../../models/enums/order-statuses'
 
@@ -17,8 +18,9 @@ import { OrderStatuses } from '../../../../models/enums/order-statuses'
 })
 export class OrderItemComponent implements OnInit {
   @Input() order: any;
+  private readonly formBuilder: FormBuilder;
   date: Date = new Date();
-  isExpanded: boolean = false;
+  form!: FormGroup;
   statusColorStyle: string = '';
 
   get totalPrice() {
@@ -27,12 +29,24 @@ export class OrderItemComponent implements OnInit {
     return result;
   }
 
-  constructor() {
+  constructor(formBuilder: FormBuilder) {
+    this.formBuilder = formBuilder;
   }
 
   ngOnInit(): void {
     this.date = new Date(this.order.orderdate);
+    this.form = this.getFormGroupInstance();
     this.applyStatusColor();
+  }
+
+  private getFormGroupInstance() {
+    let editForm: FormGroup;
+    editForm = this.formBuilder.group({
+      id: new FormControl(this.order.id),
+      address: new FormControl(this.order.address, [Validators.required, Validators.minLength(7), Validators.maxLength(200)]),
+      statusid: new FormControl(0)
+    });
+    return editForm;
   }
 
   private applyStatusColor() {
