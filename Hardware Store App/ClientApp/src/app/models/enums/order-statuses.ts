@@ -1,8 +1,8 @@
 export enum OrderStatuses {
-  WaitingForApproving = 'Waiting for approving',
-  Delivering = 'Delivering',
-  WaitingForCustomer = 'Waiting for customer',
-  Completed = 'Completed',
-  Canceled = 'Canceled',
-  Returned = 'Returned'
+  Canceled = 1,
+  Completed = 2,
+  WaitingForApproving = 3,
+  Delivering = 4,
+  WaitingForCustomer = 5,
+  Returned = 6
 }
