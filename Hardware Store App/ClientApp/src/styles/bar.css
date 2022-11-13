@@ -1,0 +1,11 @@
+﻿a:hover,
+li:hover,
+button:hover {
+  transform: scale(1.05);
+  transition-duration: 200ms;
+}
+
+li img {
+  width: 32px;
+  height: 32px;
+}
