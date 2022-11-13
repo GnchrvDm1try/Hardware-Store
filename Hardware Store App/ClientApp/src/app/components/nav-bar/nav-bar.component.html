@@ -2,14 +2,9 @@
   <nav class="h-full">
     <div class="container mx-auto h-full flex items-center justify-between">
       <a class="font-bold text-2xl" [routerLink]="['']">Hardware-Store</a>
-      <ul class="flex font-medium text-lg space-x-[20px]">
-        <li>
-          <a href="#">About Us</a>
-        </li>
-        <li>
-          <a href="#">Reviews</a>
-        </li>
-      </ul>
+      <div>
+        <app-search-bar></app-search-bar>
+      </div>
       <ul class="flex font-medium text-lg space-x-[20px]">
         <li *ngIf="isLoggedIn">
           <a [routerLink]="['Profile']">Profile</a>
