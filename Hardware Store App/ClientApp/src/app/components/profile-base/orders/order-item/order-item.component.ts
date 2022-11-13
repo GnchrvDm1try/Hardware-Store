@@ -58,6 +58,20 @@ export class OrderItemComponent implements OnInit {
     this.isEditing = !this.isEditing;
     if (this.isEditing) this.form.get('address')?.setValue(this.order.address);
   }
+
+  discard() {
+    if (confirm('Are you sure?')) {
+      this.form.get('statusid')?.setValue(OrderStatuses.Canceled);
+      this.form.get('address')?.setValue(this.order.address);
+      this.userService.updateOrder(this.form).subscribe(() => {
+        this.order.status.title = OrderStatuses[OrderStatuses.Canceled];
+        this.applyStatusColor();
+        this.isAllowedToEdit = false;
+        this.isEditing = false;
+      });
+    }
+  }
+
   private getFormGroupInstance() {
     let editForm: FormGroup;
     editForm = this.formBuilder.group({
