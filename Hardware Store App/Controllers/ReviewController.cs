@@ -24,8 +24,6 @@ namespace Hardware_Store_App.Controllers
         [HttpPatch("edit")]
         public async Task<IActionResult> Edit([FromBody] Review review)
         {
-            if (review is null) return BadRequest("Review was null");
-
             Review? reviewFromDB = await context.Reviews.AsNoTracking().FirstOrDefaultAsync(r => r.Id == review.Id);
             if (reviewFromDB is null) return BadRequest("Couldn't find review");
 
@@ -37,7 +35,7 @@ namespace Hardware_Store_App.Controllers
             context.Reviews.Update(review);
             await context.SaveChangesAsync();
 
-            return Ok("Review has been updated");
+            return Ok("Review has been successfully updated");
         }
 
         [HttpDelete("delete")]
@@ -49,7 +47,7 @@ namespace Hardware_Store_App.Controllers
 
             context.Reviews.Remove(review);
             await context.SaveChangesAsync();
-            return Ok("Review has been deleted");
+            return Ok("Review has been successfully deleted");
         }
     }
 }

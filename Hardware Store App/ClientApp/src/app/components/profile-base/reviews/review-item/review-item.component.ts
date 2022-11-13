@@ -50,11 +50,11 @@ export class ReviewItemComponent implements OnInit {
   private getFormGroupInstance() {
     let editForm: FormGroup;
     editForm = this.formBuilder.group({
-      comment: new FormControl(this.review.comment, [Validators.required, Validators.maxLength(5000)]),
-      estimation: new FormControl(Math.round(this.review.estimation), [Validators.required]),
+      id: new FormControl(this.review.id),
       userId: new FormControl(this.review.userid),
       productId: new FormControl(this.review.productid),
-      id: new FormControl(this.review.id)
+      comment: new FormControl(this.review.comment, [Validators.required, Validators.maxLength(5000)]),
+      estimation: new FormControl(Math.round(this.review.estimation), [Validators.required])
     });
     return editForm;
   }

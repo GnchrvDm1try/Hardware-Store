@@ -6,7 +6,7 @@
     <h3 class="mb-2">
       <a class="break-words text-sky-600 text-xl font-semibold" [routerLink]="['/Products/Details', product.productid]">{{product.product.name}}</a>
       <span class="ml-2 border-[1px] border-gray-400 rounded px-[4px] text-gray-400">{{product.product.category.name}}</span>
-      <button (click)="removeWishlistItem()" class="float-right"><img class="w-7 h-7" src="/assets/icons/bucket_with_a_cross.svg" alt="Remove product" /></button>
+      <img *ngIf="url === 'Wishlist'" class="w-7 h-7 float-right hover:cursor-pointer" src="/assets/icons/bucket_with_a_cross.svg" alt="Remove product" (click)="removeWishlistItem()" />
     </h3>
     <p class="text-sm">
       <ng-container *ngIf="url === 'Wishlist'">Added at: {{additionDate.getDate().toString().padStart(2, '0')}}.{{additionDate.getMonth().toString().padStart(2, '0')}}.{{additionDate.getFullYear()}}</ng-container>
