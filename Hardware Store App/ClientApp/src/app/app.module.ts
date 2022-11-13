@@ -5,8 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ProductBaseModule } from './components/product-base/product-base.module';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SearchBarComponent } from "./components/nav-bar/search-bar/search-bar.component";
 import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -26,6 +27,7 @@ export function tokenGetter() {
   declarations: [
     AppComponent,
     NavBarComponent,
+    SearchBarComponent,
     FooterBarComponent,
     RegisterComponent,
     LoginComponent
