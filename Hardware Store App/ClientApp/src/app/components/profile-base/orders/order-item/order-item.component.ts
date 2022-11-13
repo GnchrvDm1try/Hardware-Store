@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { OrderStatuses } from '../../../../models/enums/order-statuses'
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-order-item',
@@ -18,6 +19,7 @@ import { OrderStatuses } from '../../../../models/enums/order-statuses'
 })
 export class OrderItemComponent implements OnInit {
   @Input() order: any;
+  private readonly userService: UserService;
   private readonly formBuilder: FormBuilder;
   date: Date = new Date();
   form!: FormGroup;
@@ -32,7 +34,8 @@ export class OrderItemComponent implements OnInit {
     return result;
   }
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(userService: UserService, formBuilder: FormBuilder) {
+    this.userService = userService;
     this.formBuilder = formBuilder;
   }
 
@@ -44,6 +47,12 @@ export class OrderItemComponent implements OnInit {
       this.isAllowedToEdit = true;
   }
 
+  saveChanges() {
+    this.userService.updateOrder(this.form).subscribe(() => {
+      this.order.address = this.form.get('address')?.value;
+      this.isEditing = false;
+    });
+  }
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
