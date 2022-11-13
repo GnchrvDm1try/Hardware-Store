@@ -1,0 +1,31 @@
+<div class="flex justify-between items-center">
+  <div class="flex justify-between w-full">
+    <p>{{orderDate.getDate().toString().padStart(2, '0')}}.{{(orderDate.getMonth()+1).toString().padStart(2, '0')}}.{{orderDate.getFullYear()}}</p>
+    <p [ngClass]="['px-2 rounded', statusColorStyle]">{{order.status.title}}</p>
+    <p class="w-[90px]">{{totalPrice | currency}}</p>
+  </div>
+  <img class="w-9 ml-4 hover:cursor-pointer" src="assets/icons/dropdown_icon.svg" alt="See more/less" [@rotatedState]="isExpanded" (click)="isExpanded = !isExpanded" />
+</div>
+<div *ngIf="isExpanded">
+  <div class="flex justify-between">
+    <h3>
+      Delivery address:
+      <span *ngIf="!isEditing" class="italic">{{order.address}}</span>
+      <form class="inline-block" [formGroup]="form" method="post" id="editForm">
+        <input *ngIf="isEditing" class="border rounded mr-2" type="text" maxlength="200" formControlName="address" />
+      </form>
+      <ng-container *ngIf="isEditing">
+        <span *ngIf="form.get('address')?.errors?.required" style="color: red">You have to provide address</span>
+        <span *ngIf="form.get('address')?.errors?.minlength" style="color: red">The address has to be 7 or more characters long</span>
+      </ng-container>
+    </h3>
+    <div *ngIf="isAllowedToEdit" class="flex mt-2 space-x-2">
+      <button *ngIf="isEditing" form="editForm" type="submit" [disabled]="form.invalid" (click)="saveChanges()"><img class="w-7 h-7 hover:cursor-pointer" src="assets/icons/save_icon.svg" alt="Save" /></button>
+      <img class="w-7 h-7 hover:cursor-pointer" src="assets/icons/edit_icon.svg" alt="Edit" (click)="toggleEdit()" />
+      <img class="w-7 h-7 hover:cursor-pointer" src="assets/icons/cancel_icon.svg" alt="Discard" (click)="discard()" />
+    </div>
+  </div>
+  <div class="border-[1px] rounded mt-2 p-2" style="border-color: var(--main-slate)" *ngFor="let product of order.orderproducts">
+    <app-product-card [product]="product"></app-product-card>
+  </div>
+</div>

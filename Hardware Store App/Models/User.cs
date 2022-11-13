@@ -13,7 +13,7 @@ namespace Hardware_Store_App.Models
             Wishlists = new HashSet<Wishlist>();
         }
 
-        public User(RegisterModel model)
+        public User(RegisterModel model) : this()
         {
             this.Firstname = model.FirstName;
             this.Lastname = model.LastName;
@@ -23,6 +23,21 @@ namespace Hardware_Store_App.Models
             if (model.Birthdate != null)
                 this.Birthdate = DateOnly.FromDateTime((DateTime)model.Birthdate);
             this.Hashedpassword = PasswordHasher.HashPassword(model.Password);
+            this.Address = model.Address;
+            this.Roleid = 2;
+        }
+        
+        public User(EditModel model) : this()
+        {
+            this.Firstname = model.FirstName;
+            this.Lastname = model.LastName;
+            this.Email = model.Email;
+            this.Phonenumber = model.PhoneNumber;
+            this.Sex = model.Sex;
+            if (model.Birthdate != null)
+                this.Birthdate = DateOnly.FromDateTime((DateTime)model.Birthdate);
+            if (model.Password != null)
+                this.Hashedpassword = PasswordHasher.HashPassword(model.Password);
             this.Address = model.Address;
             this.Roleid = 2;
         }
@@ -41,8 +56,8 @@ namespace Hardware_Store_App.Models
         public int? Roleid { get; set; }
 
         public virtual Role? Role { get; set; }
-        public virtual ICollection<Order>? Orders { get; set; }
-        public virtual ICollection<Review>? Reviews { get; set; }
-        public virtual ICollection<Wishlist>? Wishlists { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Wishlist> Wishlists { get; set; }
     }
 }

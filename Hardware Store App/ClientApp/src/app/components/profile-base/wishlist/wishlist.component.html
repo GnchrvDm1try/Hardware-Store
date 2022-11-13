@@ -1,0 +1,10 @@
+<ng-container *ngIf="!!products && products.length !== 0; else empty">
+  <div class="border-[1px] rounded m-2 p-2" style="border-color: var(--main-slate)" *ngFor="let product of products">
+    <app-product-card (removeEvent)="remove(product.productid)" [product]="product"></app-product-card>
+  </div>
+</ng-container>
+<ng-template #empty>
+  <div class="flex items-center justify-center" style="height: calc(100vh - 112px);">
+    <p class="text-xl font-medium">The wishlist is empty</p>
+  </div>
+</ng-template>

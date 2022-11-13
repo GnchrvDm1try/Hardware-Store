@@ -122,6 +122,10 @@ namespace Hardware_Store_App.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Address)
+                    .HasMaxLength(200)
+                    .HasColumnName("address");
+
                 entity.Property(e => e.Orderdate)
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("orderdate")

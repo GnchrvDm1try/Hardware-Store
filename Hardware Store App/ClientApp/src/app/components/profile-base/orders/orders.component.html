@@ -1,0 +1,10 @@
+<ng-container *ngIf="!!orders && orders.length !== 0; else empty">
+  <div class="border-[1px] rounded m-2 p-2" style="border-color: var(--main-slate)" *ngFor="let order of orders">
+    <app-order-item [order]="order"></app-order-item>
+  </div>
+</ng-container>
+<ng-template #empty>
+  <div class="flex items-center justify-center" style="height: calc(100vh - 112px);">
+    <p class="text-xl font-medium">The list of orders is empty</p>
+  </div>
+</ng-template>
