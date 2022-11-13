@@ -21,12 +21,15 @@ export class OrderItemComponent implements OnInit {
   @Input() order: any;
   private readonly userService: UserService;
   private readonly formBuilder: FormBuilder;
-  date: Date = new Date();
   form!: FormGroup;
   statusColorStyle: string = '';
   isExpanded: boolean = false;
   isEditing: boolean = false;
   isAllowedToEdit = false;
+
+  get orderDate() {
+    return new Date(this.order.orderdate);
+  }
 
   get totalPrice() {
     let result = 0;
@@ -40,7 +43,6 @@ export class OrderItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.date = new Date(this.order.orderdate);
     this.form = this.getFormGroupInstance();
     this.applyStatusColor();
     if (this.order.statusid !== OrderStatuses.Completed && this.order.statusid !== OrderStatuses.Canceled && this.order.statusid !== OrderStatuses.Returned)

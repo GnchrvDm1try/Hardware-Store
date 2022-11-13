@@ -13,6 +13,10 @@ export class ProductCardComponent implements OnInit {
   private readonly userService: UserService;
   readonly url: string;
 
+  get additionDate(): Date {
+    return new Date(this.product.additiondate);
+  }
+
   constructor(userService: UserService, router: Router) {
     this.userService = userService;
     this.url = router.url.split('/')[2];

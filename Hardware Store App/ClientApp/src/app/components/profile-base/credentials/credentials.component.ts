@@ -10,8 +10,12 @@ export class CredentialsComponent implements OnInit {
   private readonly userService: UserService;
   user: any;
 
-  get registrationDate(): string[] {
-    return this.user.registrationdate.split('T')[0].split('-');
+  get birthDate(): Date {
+    return new Date(this.user.birthdate);
+  }
+
+  get registrationDate(): Date {
+    return new Date(this.user.registrationdate);
   }
 
   constructor(userService: UserService) {

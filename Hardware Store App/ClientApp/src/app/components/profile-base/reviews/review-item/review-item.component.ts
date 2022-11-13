@@ -12,14 +12,12 @@ export class ReviewItemComponent implements OnInit {
   @Output() removeEvent: any = new EventEmitter<any>();
   private readonly reviewService: ReviewService;
   private readonly formBuilder: FormBuilder;
-  private reviewDateTime: Date | undefined;
   form!: FormGroup;
   isEditing: boolean = false;
   estimation: number = 1;
 
-  get dateTime() {
-    return `${this.reviewDateTime?.getHours().toString().padStart(2, '0')}:${this.reviewDateTime?.getMinutes().toString().padStart(2, '0')}
-      ${this.reviewDateTime?.getDate()?.toString()?.padStart(2, '0')}.${this.reviewDateTime?.getMonth()?.toString()?.padStart(2, '0')}.${this.reviewDateTime?.getFullYear()}`;
+  get reviewDateTime(): Date {
+    return new Date(this.review.reviewdate);
   }
 
   constructor(reviewService: ReviewService, formBuilder: FormBuilder) {
@@ -28,7 +26,6 @@ export class ReviewItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reviewDateTime = new Date(this.review.reviewdate);
     this.form = this.getFormGroupInstance();
     this.estimation = this.review.estimation;
   }

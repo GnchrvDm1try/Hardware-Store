@@ -9,7 +9,7 @@
       <button (click)="removeWishlistItem()" class="float-right"><img class="w-7 h-7" src="/assets/icons/bucket_with_a_cross.svg" alt="Remove product" /></button>
     </h3>
     <p class="text-sm">
-      <ng-container *ngIf="url === 'Wishlist'">Added at: {{product.additiondate.day}}.{{product.additiondate.month}}.{{product.additiondate.year}}</ng-container>
+      <ng-container *ngIf="url === 'Wishlist'">Added at: {{additionDate.getDate().toString().padStart(2, '0')}}.{{additionDate.getMonth().toString().padStart(2, '0')}}.{{additionDate.getFullYear()}}</ng-container>
       <span class="flex float-right text-base font-semibold">{{product.product.price | currency}}</span>
     </p>
     <br />
