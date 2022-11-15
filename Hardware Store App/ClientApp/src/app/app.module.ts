@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ProductBaseModule } from './components/product-base/product-base.module';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { SearchBarComponent } from "./components/nav-bar/search-bar/search-bar.component";
+import { SearchResultComponent } from "./components/search-result/search-result.component";
 import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
@@ -28,6 +29,7 @@ export function tokenGetter() {
     AppComponent,
     NavBarComponent,
     SearchBarComponent,
+    SearchResultComponent,
     FooterBarComponent,
     RegisterComponent,
     LoginComponent
@@ -41,7 +43,8 @@ export function tokenGetter() {
     RouterModule.forRoot([
       { path: '', redirectTo: 'Products', pathMatch: 'full' },
       { path: 'Registration', component: RegisterComponent, canActivate: [AuthenticatedGuard] },
-      { path: 'Login', component: LoginComponent, canActivate: [AuthenticatedGuard] }
+      { path: 'Login', component: LoginComponent, canActivate: [AuthenticatedGuard] },
+      { path: 'Search', component: SearchResultComponent }
     ]),
     ProfileBaseModule,
     ProductBaseModule,
