@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -8,7 +8,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
+  @Input() products: Product[] = [];
   private service: ProductService;
 
   products: any;
@@ -18,7 +18,9 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    if (this.products) {
+      this.getProducts();
+    }
   }
 
   getProducts() {
