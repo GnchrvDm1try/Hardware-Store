@@ -7,10 +7,15 @@ import { Router } from "@angular/router";
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent implements OnInit {
+  private static readonly MIN_SEARCH_LENGTH: number = 2;
   private readonly router: Router;
   searchValue: string = '';
 
-  constructor(router: Router) {
+  get MIN_SEARCH_LENGTH() {
+    return SearchBarComponent.MIN_SEARCH_LENGTH;
+  }
+
+  constructor(router: Router, searchService: SearchService) {
     this.router = router;
   }
 
