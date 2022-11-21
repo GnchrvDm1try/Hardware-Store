@@ -23,7 +23,12 @@ namespace Hardware_Store_App.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string value)
         {
-            return Ok(await context.Products.Where(p => p.Name.ToLower().Contains(value.ToLower())).ToListAsync());
+            List<Product> searchedProducts =
+                await context.Products
+                    .Where(p => p.Name.ToLower().Contains(value.ToLower()))
+                    .Include(p => p.Category)
+                    .ToListAsync();
+            return Ok(searchedProducts);
         }
     }
 }
