@@ -64,12 +64,11 @@ export class ProductDetailComponent implements OnInit {
     let leftBoundary: number = 0;
     let rigthBoundary: number = wishlist.length - 1;
 
-    while (leftBoundary < rigthBoundary) {
-      const indexOfArrayMiddle: number = Math.floor((leftBoundary + rigthBoundary) / 2);
+    while (leftBoundary <= rigthBoundary) {
+      const indexOfArrayMiddle: number = Math.trunc((leftBoundary + rigthBoundary) / 2);
 
-      if (wishlist[indexOfArrayMiddle].productid === target) {
-        return indexOfArrayMiddle;
-      }
+      if (wishlist[indexOfArrayMiddle].productid === target) return indexOfArrayMiddle;
+
       if (target < wishlist[indexOfArrayMiddle].productid) rigthBoundary = indexOfArrayMiddle - 1;
       else leftBoundary = indexOfArrayMiddle + 1;
     }
