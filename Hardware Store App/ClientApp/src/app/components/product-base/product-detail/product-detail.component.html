@@ -35,12 +35,8 @@
           <p class="font-semibold">({{product.rating}})</p>
         </div>
         <ng-container *ngIf="isUserAuthenticated">
-          <button (click)="toggleWishlistItem()" *ngIf="isInWishlist; else notInWishlist">
-            <img class="w-6 h-6" src="assets/icons/heart_filled_icon.svg" />
-          </button>
-          <ng-template #notInWishlist>
-            <button (click)="toggleWishlistItem()"><img class="w-6 h-6" src="assets/icons/heart_unfilled_icon.svg" /></button>
-          </ng-template>
+          <img *ngIf="isInWishlist" class="w-6 h-6" src="assets/icons/heart_filled_icon.svg" (click)="toggleWishlistItem()" />
+          <img *ngIf="!isInWishlist" class="w-6 h-6" src="assets/icons/heart_unfilled_icon.svg" (click)="toggleWishlistItem()" />
         </ng-container>
           <p class="font-semibold">{{product.price | currency}}</p>
         </div>
