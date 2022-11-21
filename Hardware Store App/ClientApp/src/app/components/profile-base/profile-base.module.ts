@@ -35,6 +35,7 @@ import { ReviewItemComponent } from './reviews/review-item/review-item.component
       {
         path: 'Profile', component: CredentialsComponent, canActivate: [NotAuthenticatedGuard],
         children: [
+          { path: '', redirectTo: 'Orders', pathMatch: 'full' },
           { path: 'Edit', component: EditComponent },
           { path: 'Orders', component: OrdersComponent },
           { path: 'Wishlist', component: WishlistComponent },
