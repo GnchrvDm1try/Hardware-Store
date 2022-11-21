@@ -28,10 +28,11 @@ export class SearchBarComponent implements OnInit {
   }
 
   search() {
-    this.router.navigate(
-      ['Search/'],
-      {queryParams: {'value': this.searchValue}}
-    );
+    if (this.searchValue.length >= this.MIN_SEARCH_LENGTH)
+      this.router.navigate(
+        ['Search/'],
+        {queryParams: {'value': this.searchValue}}
+      );
   }
 
   previewSearch(searchValue: string) {
