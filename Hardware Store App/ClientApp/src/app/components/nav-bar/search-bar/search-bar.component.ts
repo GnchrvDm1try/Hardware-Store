@@ -12,6 +12,7 @@ export class SearchBarComponent implements OnInit {
   private readonly router: Router;
   private readonly searchService: SearchService;
   searchValue: string = '';
+  isDisplaying: boolean = false;
   resultProducts: any = [];
 
   get MIN_SEARCH_LENGTH() {

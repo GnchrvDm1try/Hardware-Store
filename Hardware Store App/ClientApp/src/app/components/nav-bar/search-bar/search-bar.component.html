@@ -2,9 +2,9 @@
   <label for="search">
     <img class="w-6 h-6 mx-2 hover:cursor-pointer" src="assets/icons/search_icon.svg" alt="" (click)="searchValue.length >= MIN_SEARCH_LENGTH ? search() : null">
   </label>
-  <input class="rounded-r-full w-full outline-none text-lg placeholder:italic" type="search" name="search" id="search" placeholder="Search for products" [(ngModel)]="searchValue" (ngModelChange)="previewSearch(searchValue)" (keydown.enter)="search()" >
+  <input class="rounded-r-full w-full outline-none text-lg placeholder:italic" type="search" name="search" id="search" placeholder="Search for products" [(ngModel)]="searchValue" (ngModelChange)="previewSearch(searchValue)" (keydown.enter)="search()" (blur)="isDisplaying=false" (focus)="isDisplaying=true" >
 </div>
-<div *ngIf="!!resultProducts && resultProducts.length > 0" class="absolute bg-white rounded p-2 w-72 z-50">
+<div *ngIf="isDisplaying && !!resultProducts && resultProducts.length > 0" class="absolute bg-white rounded p-2 w-72 z-50">
   <div *ngFor="let product of resultProducts">
     <a [routerLink]="['/Products/Details', product.id]" class="block w-full hover:bg-gray-100 transition duration-100">
       <p class="text-sky-600 inline">{{product.name}}</p>
